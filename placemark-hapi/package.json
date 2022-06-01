@@ -1,8 +1,9 @@
 {
   "name": "placemark-hapi",
   "version": "0.1.0",
-  "description": "",
+  "description": "A Placemark application for ",
   "main": "src/server.js",
+  "type": "module",
   "scripts": {
     "start": "node src/server.js",
     "lint": "./node_modules/.bin/eslint . --ext .js"
