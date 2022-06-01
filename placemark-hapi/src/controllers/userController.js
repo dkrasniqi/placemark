@@ -5,4 +5,16 @@ export const userController ={
     },
   },
 
+  loginView: {
+    handler: function(request, h){
+      return h.view("login", {title: "Please log into your account"});
+    },
+  },
+
+  signupView: {
+    handler: function(request, h){
+      return h.view("signup", {title: "Please create an account"});
+    },
+  },
+
 } 
