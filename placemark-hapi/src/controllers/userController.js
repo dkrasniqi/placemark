@@ -3,24 +3,28 @@ import { db } from "../models/db.js";
 
 export const userController = {
   index: {
+    auth: false,
     handler: function(request, h){
       return h.view("welcome", {title: "Welcome to the test page of placemark"});
     },
   },
 
   loginView: {
+    auth: false,
     handler: function(request, h){
       return h.view("login", {title: "Please log into your account"});
     },
   },
 
   signupView: {
+    auth: false,
     handler: function(request, h){
       return h.view("signup", {title: "Please create an account"});
     },
   },
 
   signup: {
+    auth: false,
     validate: {
       payload: UserSpec,
       options: { abortEarly: false },
@@ -37,6 +41,7 @@ export const userController = {
   },
 
   login: {
+    auth: false,
     validate: {
       payload: UserCredentialsSpec ,
       options: {abortEarly: false},
@@ -53,8 +58,17 @@ export const userController = {
         // Add error page
         return h.view("login", {title: "Logging in error"}).takeover().code(400);
       }
+      request.cookieAuth.set({ id: user._id });
       return h.view("welcome", {title: "Loggin succesfull"});
     }
-  }
+  },
+
+  async validate(request, session) {
+    const user = await db.userStore.getUserById(session.id);
+    if (!user) {
+      return { valid: false };
+    }
+    return { valid: true, credentials: user };
+  },
 
 }
