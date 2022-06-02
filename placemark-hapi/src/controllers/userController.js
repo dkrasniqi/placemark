@@ -1,4 +1,4 @@
-import { UserSpec } from "../models/joi.js";
+import { UserCredentialsSpec, UserSpec } from "../models/joi.js";
 import { db } from "../models/db.js";
 
 export const userController = {
@@ -35,5 +35,26 @@ export const userController = {
       return h.redirect("/login");
     },
   },
+
+  login: {
+    validate: {
+      payload: UserCredentialsSpec ,
+      options: {abortEarly: false},
+      failAction: function (request, h, error){
+        // Add error page
+        return h.view("login", {title: "Logging in error"}).takeover().code(400);
+      }
+    },
+
+    handler: async function(request, h){
+      const user = request.payload;
+      const userCheck = await db.userStore.getUserByEmail(user.email);
+      if(!userCheck|| user.password !== userCheck.password){
+        // Add error page
+        return h.view("login", {title: "Logging in error"}).takeover().code(400);
+      }
+      return h.view("welcome", {title: "Loggin succesfull"});
+    }
+  }
 
 }
