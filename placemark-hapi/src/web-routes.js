@@ -7,6 +7,7 @@ export const webRoutes=[
 { method: "GET", path: "/signup", config: userController.signupView},
 { method: "POST", path:"/register", config: userController.signup},
 { method: "POST", path: "/login", config: userController.login},
+{ method: "GET", path:"/logout", config: userController.logout},
 
 { method: "GET", path:"/dashboard", config: dashboardController.index},
 { method: "POST", path:"/dashboard/addplacemark", config: dashboardController.addPlacemark},

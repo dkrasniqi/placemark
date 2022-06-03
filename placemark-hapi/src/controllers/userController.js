@@ -1,6 +1,7 @@
 import { UserCredentialsSpec, UserSpec } from "../models/joi.js";
 import { db } from "../models/db.js";
 
+
 export const userController = {
   index: {
     auth: false,
@@ -60,6 +61,13 @@ export const userController = {
       }
       request.cookieAuth.set({ id: userData._id });
       return h.redirect("/dashboard");
+    }
+  },
+
+  logout: {
+    handler: async function(request, h){
+      request.cookieAuth.clear();
+      return h.redirect("/");
     }
   },
 
