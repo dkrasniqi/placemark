@@ -53,13 +53,13 @@ export const userController = {
 
     handler: async function(request, h){
       const user = request.payload;
-      const userCheck = await db.userStore.getUserByEmail(user.email);
-      if(!userCheck|| user.password !== userCheck.password){
+      const userData = await db.userStore.getUserByEmail(user.email);
+      if(!userData|| user.password !== userData.password){
         // Add error page
         return h.view("login", {title: "Logging in error"}).takeover().code(400);
       }
-      request.cookieAuth.set({ id: user._id });
-      return h.view("welcome", {title: "Loggin succesfull"});
+      request.cookieAuth.set({ id: userData._id });
+      return h.redirect("/dashboard");
     }
   },
 

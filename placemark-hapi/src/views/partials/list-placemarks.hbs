@@ -1,0 +1,30 @@
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each placemarks}}
+      <tr>
+        <td>
+          {{name}}
+        </td>
+        <td>
+          {{lat}}
+        </td>
+        <td>
+          {{long}}
+        </td>
+        <td>
+        <!--  <a href="/playlist/{{../playlist._id}}/deletetrack/{{_id}}" class="ui icon button">
+            <i class="fas fa-trash"></i>
+          </a> -->
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

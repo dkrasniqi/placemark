@@ -1,4 +1,5 @@
 import {userController} from "./controllers/userController.js";
+import { dashboardController } from "./controllers/dashboardController.js";
 
 export const webRoutes=[
 { method: "GET", path: "/", config: userController.index },
@@ -6,5 +7,8 @@ export const webRoutes=[
 { method: "GET", path: "/signup", config: userController.signupView},
 { method: "POST", path:"/register", config: userController.signup},
 { method: "POST", path: "/login", config: userController.login},
+
+{ method: "GET", path:"/dashboard", config: dashboardController.index},
+{ method: "POST", path:"/dashboard/addplacemark", config: dashboardController.addPlacemark},
 
 ];
