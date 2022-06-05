@@ -5,12 +5,15 @@ export const dashboardController = {
   
   index: {
     handler: async function (request, h) {
-      const user = request.auth.credentials;
-      const placemarks = await db.placemarkStore.getUserPlacemarks(user.id);
+      const loggedInUser = request.auth.credentials;
+      const placemarks = await db.placemarkStore.getUserPlacemarks(loggedInUser._id);
       const data = {
         title: "Your Placemarks",
+        user: loggedInUser,
         placemarks: placemarks,
       }
+      console.log(placemarks);
+      console.log(data);
 
       return h.view("dashboard", data );
     },
@@ -26,7 +29,12 @@ export const dashboardController = {
       }},
     handler: async function (request, h){
       const user = request.auth.credentials;
-      const placemark = request.payload;
+      const placemark = {
+        userid: user._id,
+        name: request.payload.name,
+        lat: request.payload.lat,
+        long: request.payload.long,
+      }
       await db.placemarkStore.addPlacemark(placemark);
       return h.redirect("/dashboard");
 
