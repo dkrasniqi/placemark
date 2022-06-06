@@ -39,20 +39,38 @@ export const userMongoStore = {
   },
 
   async changeUserMail(id, newMail){
-    await User.updateOne({_id: id}, {email: newMail});
-    const user  = await User.findOne({_id: id}).lean();
-    return user;
+    try{
+      await User.updateOne({_id: id}, {email: newMail});
+      const user  = await User.findOne({_id: id}).lean();
+      return user;
+    }catch(error){
+      console.log("bad id");
+      return null;
+    }
+    
   },
 
   async changeUserName(id, newFirst, newLast){
-    await User.updateOne({_id: id}, {firstName: newFirst, lastName: newLast});
-    const user = await User.findOne({_id: id}).lean();
-    return user;
+    try{
+      await User.updateOne({_id: id}, {firstName: newFirst, lastName: newLast});
+      const user = await User.findOne({_id: id}).lean();
+      return user;
+    }catch(error){
+      console.log("bad id");
+      return null;
+    }
+    
   },
 
   async changeUserPass(id, newPass){
-    await User.updateOne({_id:  id}, {password: newPass});
-    const user = User.findOne({_id : id}).lean();
-    return user;
+    try{
+      await User.updateOne({_id:  id}, {password: newPass});
+      const user = User.findOne({_id : id}).lean();
+      return user;
+    }catch(error){
+      console.log("bad id");
+      return null;
+    }
+    
   }
 };
