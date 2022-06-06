@@ -30,6 +30,7 @@ export const dashboardController = {
       const placemark = {
         userid: user._id,
         name: request.payload.name,
+        description: request.payload.description,
         lat: request.payload.lat,
         long: request.payload.long,
       }
