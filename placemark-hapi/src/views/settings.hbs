@@ -1,0 +1,65 @@
+{{> loggedInNavigator active="settings"}}
+
+<section class="section">
+  <h1 class="title">User Settings</h1>
+  <form action="/changename" method="POST">
+    <label class="label">Name</label>
+    <div class="field is-horizontal">
+      <div class="field-body">
+        <div class="field">
+          <input class="input" type="text" placeholder="New first name" name="newFirstName">
+        </div>
+        <div class="field">
+          <input class="input" type="text" placeholder="New last name" name="newLastName">
+        </div>
+      </div>
+    </div>
+    <div class="field is-grouped">
+      <button class="button is-link">Change name</button>
+    </div>
+  </form>
+
+
+  <form action="/changemail" method="POST">
+    <label class="label">Mail</label>
+    <div class="field is-horizontal">
+      <div class="field-body">
+        <div class="field">
+          <input class="input" type="text" placeholder="Enter your old email" name="oldMail">
+        </div>
+        <div class="field">
+          <input class="input" type="text" placeholder="Enter your new email" name="newMail">
+        </div>
+        <div class="field">
+          <input class="input" type="text" placeholder="Repeat your new email" name="newMailConfirm">
+        </div>
+      </div>
+    </div>
+    <div class="field is-grouped">
+      <button class="button is-link">Change E-Mail</button>
+    </div>
+  </form>
+
+  <form action="/changepass" method="POST">
+    <label class="label">Password</label>
+    <div class="field is-horizontal">
+      <div class="field-body">
+        <div class="field">
+          <input class="input" type="password" placeholder="Enter your old password" name="oldPass">
+        </div>
+        <div class="field">
+          <input class="input" type="password" placeholder="Repeat your new password" name="newPass">
+        </div>
+        <div class="field">
+          <input class="input" type="password" placeholder="Repeat your new password" name="newPassConfirm">
+        </div>
+      </div>
+    </div>
+    <div class="field is-grouped">
+      <button class="button is-link">Change Password</button>
+    </div>
+  </form>
+  
+
+    
+</section>

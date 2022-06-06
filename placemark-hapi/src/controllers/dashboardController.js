@@ -12,8 +12,6 @@ export const dashboardController = {
         user: loggedInUser,
         placemarks: placemarks,
       }
-      console.log(placemarks);
-      console.log(data);
 
       return h.view("dashboard", data );
     },

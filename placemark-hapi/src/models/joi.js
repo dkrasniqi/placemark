@@ -16,4 +16,21 @@ export const PlacemarkSpec = {
   name: Joi.string().required(),
   lat: Joi.number().required(),
   long: Joi.number().required(),
-}
+};
+
+export const changeNameSpec = {
+  newFirstName: Joi.string().required(),
+  newLastName: Joi.string().required(),
+};
+
+export const changeMailSpec = {
+  oldMail: Joi.string().email().required() ,
+  newMail: Joi.string().email().required(),
+  newMailConfirm: Joi.string().email().required(),
+};
+
+export const changePassSpec = {
+  oldPass: Joi.string().required(),
+  newPass: Joi.string().required(),
+  newPassConfirm: Joi.string().required(),
+};

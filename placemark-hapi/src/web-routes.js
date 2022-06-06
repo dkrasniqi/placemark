@@ -8,6 +8,10 @@ export const webRoutes=[
 { method: "POST", path:"/register", config: userController.signup},
 { method: "POST", path: "/login", config: userController.login},
 { method: "GET", path:"/logout", config: userController.logout},
+{ method: "GET", path:"/settings", config: userController.settings},
+{ method: "POST", path:"/changename", config: userController.changeName},
+{ method: "POST", path:"/changemail", config:  userController.changeMail},
+{ method: "POST", path:"/changepass", config: userController.changePass},
 
 { method: "GET", path:"/dashboard", config: dashboardController.index},
 { method: "POST", path:"/dashboard/addplacemark", config: dashboardController.addPlacemark},
