@@ -17,6 +17,8 @@ export const PlacemarkSpec = {
   description: Joi.string().required(),
   lat: Joi.number().required(),
   long: Joi.number().required(),
+  categorie: Joi.string().valid("Landscape feature", "National monumentum", "Walking Trail", "Bridge", "Tree", "Venue",
+  "Ringfort", "Dolmen", "River", "Bog", "Island", "Forest").required(),
 };
 
 export const changeNameSpec = {
