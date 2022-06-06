@@ -1,5 +1,7 @@
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
+import { UserSpec, UserSpecPlus, UserCredentialsSpec, UserArray, IdSpec} from "../models/joi.js";
+import { validationError } from "./logger.js";
 
 export const userApi = {
   find: {
@@ -12,6 +14,10 @@ export const userApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Get all users",
+    notes: "Returns all users",
+    response: { schema: UserArray, failAction: validationError },
   },
 
   findOne: {
@@ -27,6 +33,11 @@ export const userApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Get a specific user",
+    notes: "Returns user",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+    response: { schema: UserSpecPlus, failAction: validationError },
   },
 
   create: {
@@ -42,6 +53,11 @@ export const userApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Create a user",
+    notes: "Returns the new  created user",
+    validate: { payload: UserSpec , failAction: validationError },
+    response: { schema: UserSpecPlus, failAction: validationError },
   },
 
   deleteAll: {
@@ -53,6 +69,10 @@ export const userApi = {
       }catch{
         return Boom.serverUnavailable("Database Error");
       }
-    }
-  }
-}
+    },
+    tags: ["api"],
+    description: "Delete all users",
+    notes: "Deletes all users from database",
+  },
+
+};
