@@ -16,9 +16,11 @@ export const webRoutes=[
 
 { method: "GET", path:"/dashboard", config: dashboardController.index},
 { method: "POST", path:"/dashboard/addplacemark", config: dashboardController.addPlacemark},
+{ method: "GET", path:"/dashboard/deleteplacemark/{id}", config: dashboardController.deletePlacemark},
 
 { method: "GET", path:"/admin/dashboard", config: adminController.listUser},
 { method: "GET", path:"/admin/dashboard/deleteuser/{id}", config:  adminController.deleteUser},
+{ method: "GET", path:"/admin/dashboard/deleteplacemark/{id}", config: adminController.deletePlacemark},
 
 { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
 

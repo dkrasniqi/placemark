@@ -37,10 +37,16 @@ export const dashboardController = {
       }
       await db.placemarkStore.addPlacemark(placemark);
       return h.redirect("/dashboard");
-
-
     }
-  }
+  },
+
+  deletePlacemark:{
+    handler: async function (request, h){
+      placemarkId = request.params.id;
+      await db.placemarkStore.deletePlacemarkById(placemarkId);
+      return h.redirect("/dashboard");
+    }
+  },
 
 
 
