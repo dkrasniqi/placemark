@@ -76,6 +76,7 @@ async function init() {
     validate: validate,
     verifyOptions: { algorithms: ["HS256"] }
   });
+
   
   server.auth.default("session");
 

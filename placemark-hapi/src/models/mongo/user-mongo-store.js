@@ -15,6 +15,7 @@ export const userMongoStore = {
   },
 
   async addUser(user) {
+    user.role = "user";
     const newUser = new User(user);
     const userObj = await newUser.save();
     const u = await this.getUserById(userObj._id);
@@ -72,5 +73,10 @@ export const userMongoStore = {
       return null;
     }
     
+  },
+
+  async getUserRolebyId(id){
+    const user = await User.findOne({_id: id}).lean();
+    return user.role;
   }
 };

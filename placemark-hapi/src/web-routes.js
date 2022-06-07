@@ -1,5 +1,6 @@
 import {userController} from "./controllers/userController.js";
 import { dashboardController } from "./controllers/dashboardController.js";
+import { adminController } from "./controllers/adminController.js";
 
 export const webRoutes=[
 { method: "GET", path: "/", config: userController.index },
@@ -15,6 +16,9 @@ export const webRoutes=[
 
 { method: "GET", path:"/dashboard", config: dashboardController.index},
 { method: "POST", path:"/dashboard/addplacemark", config: dashboardController.addPlacemark},
+
+{ method: "GET", path:"/admin/dashboard", config: adminController.listUser},
+{ method: "GET", path:"/admin/dashboard/deleteuser/{id}", config:  adminController.deleteUser},
 
 { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
 

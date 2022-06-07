@@ -37,8 +37,6 @@ export const userController = {
 
     handler: async function(request, h){
       const user = request.payload;
-      user.role = "user";
-      console.log(user);
       await db.userStore.addUser(user);
       return h.redirect("/login");
     },
@@ -62,7 +60,7 @@ export const userController = {
         // Add error page
         return h.view("login", {title: "Logging in error"}).takeover().code(400);
       }
-      request.cookieAuth.set({ id: userData._id });
+      request.cookieAuth.set({ id: userData._id, role: userData.role });
       return h.redirect("/dashboard");
     }
   },
