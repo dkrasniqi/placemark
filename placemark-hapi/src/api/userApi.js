@@ -87,6 +87,8 @@ export const userApi = {
     auth: false,
     handler: async function(request, h) {
       try {
+        console.log(request.payload.email);
+        console.log(request.payload.password);
         const user = await db.userStore.getUserByEmail(request.payload.email);
         if (!user) {
           return Boom.unauthorized("User not found");
@@ -98,6 +100,7 @@ export const userApi = {
         return h.response({ success: true, token: token }).code(201);
       
       } catch (err) {
+        console.log(err);
         return Boom.serverUnavailable("Database Error");
       }
     }
