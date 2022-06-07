@@ -15,6 +15,7 @@ export const UserSpec = UserCredentialsSpec.keys({
 export const  UserSpecPlus = UserSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
+  role: Joi.string().valid("user", "admin"),
 }).label("UserSpecDetailsPlus");
 
 export const UserArray = Joi.array().items(UserSpecPlus).label("UserArray");

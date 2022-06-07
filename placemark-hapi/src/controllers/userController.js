@@ -37,6 +37,8 @@ export const userController = {
 
     handler: async function(request, h){
       const user = request.payload;
+      user.role = "user";
+      console.log(user);
       await db.userStore.addUser(user);
       return h.redirect("/login");
     },
