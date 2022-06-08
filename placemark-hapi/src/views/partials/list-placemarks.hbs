@@ -7,6 +7,7 @@
       <th>Longitude</th>
       <th>Categorie</th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -27,6 +28,11 @@
         </td>
          <td>
           {{categorie}}
+        </td>
+        <td>
+          <a href="/placemark/{{_id}}" class="ui icon button">
+            <i class="fas fa-info"></i>
+          </a>
         </td>
         <td>
           <a href="/dashboard/deleteplacemark/{{_id}}" class="ui icon button">
