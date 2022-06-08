@@ -24,6 +24,9 @@ export const userMongoStore = {
 
   async getUserByEmail(email) {
     const user = await User.findOne({ email: email }).lean();
+    if(!user){
+      return null;
+    }
     return user;
   },
 
@@ -78,5 +81,13 @@ export const userMongoStore = {
   async getUserRolebyId(id){
     const user = await User.findOne({_id: id}).lean();
     return user.role;
-  }
-};
+  },
+
+  async checkMail(email){
+    const used = await User.exists({email: email});
+    if(used === null){
+      return   false;
+    }
+    return true;
+  },
+  } 

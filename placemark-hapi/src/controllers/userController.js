@@ -36,12 +36,16 @@ export const userController = {
       payload: UserSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        // Add error page
-        return h.view("welcome", { title: "Sign up error"}).takeover().code(400);
+        return h.view("signup", { title: "Sign up error", errors: error.details}).takeover().code(400);
       }},
 
     handler: async function(request, h){
       const user = request.payload;
+      // Check for existing user
+      const emailIsUsed = await db.userStore.checkMail(user.email);
+      if(emailIsUsed){
+        return h.response("E-Mail already in use");
+      };
       await db.userStore.addUser(user);
       return h.redirect("/login");
     },
@@ -53,8 +57,7 @@ export const userController = {
       payload: UserCredentialsSpec ,
       options: {abortEarly: false},
       failAction: function (request, h, error){
-        // Add error page
-        return h.view("login", {title: "Logging in error"}).takeover().code(400);
+        return h.view("login", {title: "Logging in error", errors: error.details}).takeover().code(400);
       }
     },
 
@@ -62,10 +65,12 @@ export const userController = {
       const user = request.payload;
       const userData = await db.userStore.getUserByEmail(user.email);
       if(!userData|| user.password !== userData.password){
-        // Add error page
-        return h.view("login", {title: "Logging in error"}).takeover().code(400);
+        const error = [{
+          message: "E-Mail or password is incorrect",
+        }];
+        return h.view("login", {title: "Logging in error", errors: error} ).takeover().code(400);
       }
-      request.cookieAuth.set({ id: userData._id, role: userData.role });
+      request.cookieAuth.set({ id: userData._id});
       return h.redirect("/dashboard");
     }
   },
@@ -93,8 +98,7 @@ export const userController = {
       payload: changeNameSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        // Add error page
-        return h.view("settings", { title: "Error while changing Name"}).takeover().code(400);
+        return h.view("settings", { title: "Error while changing Name", errors: error.details}).takeover().code(400);
       }
     },
     handler: async function(request, h){
@@ -102,7 +106,10 @@ export const userController = {
         const newLast = request.payload.newLastName;
         const userId = request.auth.credentials._id
         await db.userStore.changeUserName(userId, newFirst, newLast);   
-        return h.view("settings", {title: "Changed name"});
+        const success = [{
+          message:  "Successfully changed name"
+        }];
+        return h.view("settings", {title: "Changed name",  success: success});
     },
   },
 
@@ -111,8 +118,7 @@ export const userController = {
       payload: changeMailSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        // Add error page
-        return h.view("settings", { title: "Error while changing Mail"}).takeover().code(400);
+        return h.view("settings", { title: "Error while changing Mail", errors: error.details}).takeover().code(400);
       }
     },
     handler:  async function(request, h){
@@ -122,14 +128,23 @@ export const userController = {
       const user = await db.userStore.getUserById(request.auth.credentials._id);
 
       if(user.email !== oldMail){
-        return h.view("settings", {title: "wrong email"}).takeover().code(400);
+        const error =[{
+          message: "Old E-Mail is not correct"
+        }];
+        return h.view("settings", {title: "Error", errors: error}).takeover().code(400);
       }
 
       if(newMail !== newMailConfirm){
-        return h.view("settings", {title: "new email is not exact"}).takeover().code(400);
+        const error =[{
+          message: "New E-Mails do not match"
+        }];
+        return h.view("settings", {title: "Error", errors: error}).takeover().code(400);
       }
       await db.userStore.changeUserMail(user._id, newMail);
-      return h.view("settings", {title: "Changed email"});
+      const success = [{
+        message: "Successfully changed E-Mail"
+      }]
+      return h.view("settings", {title: "Changed email", success: success});
 
     },
   },
@@ -139,8 +154,7 @@ export const userController = {
       payload: changePassSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        // Add error page
-        return h.view("settings", { title: "Error while changing Pass"}).takeover().code(400);
+        return h.view("settings", { title: "Error while changing Password", errors: error.details}).takeover().code(400);
       }
     },
     handler: async function(request, h){
@@ -150,13 +164,24 @@ export const userController = {
       const user = await db.userStore.getUserById(request.auth.credentials._id);
 
       if(oldPass !== user.password){
-        return h.view("settings", {title: "Your current password is  wrong"});
+        const error =[{
+          message: "Old password is wrong"
+        }];
+        return h.view("settings", {title: "Error", errors:error});
       }
       if(newPass !== newPassConfirm){
-        return h.view("settings",  {title: "Passwords are not same"});
+        const error =[{
+          message: "New passwords do not match"
+        }];
+        
+        return h.view("settings",  {title: "Error", errors: error});
       }
       await db.userStore.changeUserPass(user._id, newPass);
-      return h.view("settings", {title: "Changed Password"});
+      const success = [{
+        message: "Successfully changed Password"
+      }];
+
+      return h.view("settings", {title: "Changed Password", success: success});
 
     },
   },
