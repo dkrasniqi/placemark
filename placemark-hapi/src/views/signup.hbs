@@ -2,26 +2,57 @@
 
 <section class="section">
   <h1 class="title">Sign up</h1>
-  <form action="/register" method="POST">
+  <form action="/register" method="POST" class="box">
     <label class="label">Name</label>
     <div class="field is-horizontal">
       <div class="field-body">
         <div class="field">
-          <input class="input" type="text" placeholder="Enter your first name" name="firstName">
+          <div class="control has-icons-left">
+            <input type="text" placeholder="Please enter your first name" class="input" name="firstName">
+            <span class="icon is-small is-left">
+              <i class="fa fa-user"></i>
+            </span>
+          </div>
         </div>
         <div class="field">
-          <input class="input" type="text" placeholder="Enter your last name" name="lastName">
+          <div class="control has-icons-left">
+            <input type="text" placeholder="Please enter your last name" class="input" name="lastName">
+            <span class="icon is-small is-left">
+              <i class="fa fa-user"></i>
+            </span>
+          </div>
         </div>
+
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">E-Mail</label>
+      <div class="control has-icons-left">
+        <input type="email" placeholder="Please input your e-mail" class="input" name="email">
+        <span class="icon is-small is-left">
+          <i class="fa fa-lock"></i>
+        </span>
       </div>
     </div>
     <div class="field">
-      <label class="label">Email</label> <input class="input" type="text" placeholder="Enter email" name="email">
+    
+    <div class="field">
+      <label class="label">Password</label>
+      <div class="control has-icons-left">
+        <input type="password" placeholder="*******" class="input" name="password">
+        <span class="icon is-small is-left">
+         <i class="fa fa-at"></i>
+        </span>
+      </div>
     </div>
     <div class="field">
-      <label class="label">Password</label> <input class="input" type="password" placeholder="Enter Password" name="password">
-    </div>
-    <div class="field is-grouped">
-      <button class="button is-link">Submit</button>
+      <button class="button is-link">
+        Sign up
+      </button>
     </div>
   </form>
+  
 </section>
+
+

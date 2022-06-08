@@ -24,4 +24,5 @@ export const webRoutes=[
 
 { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
 
+
 ];

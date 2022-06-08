@@ -2,15 +2,29 @@
 
 <section class="section">
   <h1 class="title">Log in</h1>
-  <form action="/login" method="POST">
+  <form action="/login" method="POST" class="box">
     <div class="field">
-      <label class="label">Email</label> <input class="input" type="text" placeholder="Enter email" name="email">
+      <label class="label">Email</label>
+      <div class="control has-icons-left">
+        <input type="email" placeholder="youremail@gmail.com" class="input" name="email">
+        <span class="icon is-small is-left">
+          <i class="fa fa-at"></i>
+        </span>
+      </div>
     </div>
     <div class="field">
-      <label class="label">Password</label> <input class="input" type="password" placeholder="Enter Password" name="password">
+      <label class="label">Password</label>
+      <div class="control has-icons-left">
+        <input type="password" placeholder="*******" class="input" name="password">
+        <span class="icon is-small is-left">
+          <i class="fa fa-lock"></i>
+        </span>
+      </div>
     </div>
-    <div class="field is-grouped">
-      <button class="button is-link">Submit</button>
+    <div class="field">
+      <button class="button is-link">
+        Login
+      </button>
     </div>
   </form>
 </section>

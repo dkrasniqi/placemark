@@ -7,7 +7,12 @@ export const userController = {
   index: {
     auth: false,
     handler: function(request, h){
-      return h.view("welcome", {title: "Welcome to the test page of placemark"});
+      const user = request.auth.credentials;
+      const data = {
+        title: "Welcome to the dashboard of placemark",
+        user: user,
+      }
+      return h.view("welcome", data);
     },
   },
 
@@ -74,7 +79,12 @@ export const userController = {
 
   settings:{
     handler: async function(request, h){
-      return h.view("settings", {title: "Change your account details"});
+      const user  =  request.auth.credentials;
+      const  data  = {
+        title: "Change your account details",
+        user: user,
+      }
+      return h.view("settings", data);
     },
   },
 

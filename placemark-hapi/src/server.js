@@ -61,6 +61,10 @@ async function init() {
     isCached: false,
   });
 
+  Handlebars.registerHelper("ifEquals", function(string1, string2, options) {
+    return (string1 === string2) ? options.fn(this) : options.inverse(this);
+  });
+
   server.auth.strategy("session", "cookie", {
     cookie: {
       name: process.env.COOKIE_NAME,
