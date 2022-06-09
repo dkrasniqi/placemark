@@ -2,6 +2,7 @@ import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
 import { PlacemarkSpec, PlacemarkSpecPlus, PlacemarkArray, IdSpec } from "../models/joi.js";
 import { validationError } from "./logger.js";
+import { decodeToken } from "./jwt-utils.js";
 
 export const placemarkApi = {
   find: {
@@ -53,8 +54,17 @@ export const placemarkApi = {
     },
     handler: async function(request, h){
       try{
-        const placemark = await db.placemarkStore.addPlacemark(request.payload);
-        if(!placemark){
+        
+        const placemark = {
+          userid: request.auth.id,
+          name: request.payload.name,
+          description: request.payload.description,
+          lat: request.payload.lat,
+          long: request.payload.long,
+          categorie: request.payload.categorie,
+        }
+        const placemarkObj = await db.placemarkStore.addPlacemark(placemark);
+        if(!placemarkObj){
           return Boom.badImplementation("Error while creating placemark");
         }
         return h.response(placemark).code(201);
