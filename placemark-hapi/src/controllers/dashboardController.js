@@ -47,6 +47,4 @@ export const dashboardController = {
     }
   },
 
-
-
 }

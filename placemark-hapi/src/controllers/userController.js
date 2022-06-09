@@ -44,7 +44,10 @@ export const userController = {
       // Check for existing user
       const emailIsUsed = await db.userStore.checkMail(user.email);
       if(emailIsUsed){
-        return h.response("E-Mail already in use");
+        const error =[{
+          message: "E-Mail already taken"
+        }]
+        return h.view("signup", {title: "Sign up error", errors:error});
       };
       await db.userStore.addUser(user);
       return h.redirect("/login");
