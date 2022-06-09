@@ -11,7 +11,9 @@ export const placemarkApi = {
     handler: async function(request, h){
       try{
         const placemarks = await db.placemarkStore.getAllPlacemarks();
+        console.log(placemarks)
         return placemarks;
+
       }catch(err){
         return Boom.serverUnavailable("Database error");
       }

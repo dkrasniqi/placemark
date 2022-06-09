@@ -32,9 +32,11 @@ export const PlacemarkSpec = Joi.object().keys({
 export const PlacemarkSpecPlus = PlacemarkSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
+  userid: IdSpec,
+  img: Joi.string(),
 }).label("PlacemarkSpecPlus");
 
-export  const PlacemarkArray =Joi.array().items(PlacemarkSpecPlus).label("PlacemarkArray");
+export  const PlacemarkArray = Joi.array().items(PlacemarkSpecPlus).label("PlacemarkArray");
 
 export const changeNameSpec = Joi.object().keys({
   newFirstName: Joi.string().required(),
@@ -52,3 +54,10 @@ export const changePassSpec = Joi.object().keys({
   newPass: Joi.string().required(),
   newPassConfirm: Joi.string().required(),
 }).label("ChangePassSpec");
+
+export const JwtAuth = Joi.object()
+.keys({
+  success: Joi.boolean().example("true").required(),
+  token: Joi.string().example("eyJhbGciOiJND.g5YmJisIjoiaGYwNTNjAOhE.gCWGmY5-YigQw0DCBo").required(),
+})
+.label("JwtAuth");

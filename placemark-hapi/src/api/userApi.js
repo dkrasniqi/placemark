@@ -1,6 +1,6 @@
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
-import { UserSpec, UserSpecPlus, UserCredentialsSpec, UserArray, IdSpec} from "../models/joi.js";
+import { UserSpec, UserSpecPlus, UserCredentialsSpec, UserArray, IdSpec, JwtAuth} from "../models/joi.js";
 import { validationError } from "./logger.js";
 import { createToken } from "./jwt-utils.js";
 
@@ -13,6 +13,7 @@ export const userApi = {
     handler: async function(request, h){
       try{
         const users = await db.userStore.getAllUsers();
+        console.log("users")
         return users;
       }catch(err){
         return Boom.serverUnavailable("Database Error");
@@ -87,8 +88,6 @@ export const userApi = {
     auth: false,
     handler: async function(request, h) {
       try {
-        console.log(request.payload.email);
-        console.log(request.payload.password);
         const user = await db.userStore.getUserByEmail(request.payload.email);
         if (!user) {
           return Boom.unauthorized("User not found");
@@ -103,7 +102,12 @@ export const userApi = {
         console.log(err);
         return Boom.serverUnavailable("Database Error");
       }
-    }
+    },
+    tags: ["api"],
+    description: "Authenticate a user",
+    notes: "Returns JWT-Token if user exists",
+    validate: { payload: UserCredentialsSpec , failAction: validationError },
+    response: { schema: JwtAuth, failAction: validationError },
   },
 
 };
