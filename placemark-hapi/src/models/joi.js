@@ -27,12 +27,12 @@ export const PlacemarkSpec = Joi.object().keys({
   long: Joi.number().required(),
   categorie: Joi.string().valid("Landscape feature", "National monumentum", "Walking Trail", "Bridge", "Tree", "Venue",
   "Ringfort", "Dolmen", "River", "Bog", "Island", "Forest").required(),
+  userid: IdSpec,
 }).label("PlacemarkSpec");
 
 export const PlacemarkSpecPlus = PlacemarkSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
-  userid: IdSpec,
   img: Joi.string(),
 }).label("PlacemarkSpecPlus");
 

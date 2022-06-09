@@ -54,21 +54,14 @@ export const placemarkApi = {
     },
     handler: async function(request, h){
       try{
-        
-        const placemark = {
-          userid: request.auth.id,
-          name: request.payload.name,
-          description: request.payload.description,
-          lat: request.payload.lat,
-          long: request.payload.long,
-          categorie: request.payload.categorie,
-        }
-        const placemarkObj = await db.placemarkStore.addPlacemark(placemark);
+        console.log(request.payload)
+        const placemarkObj = await db.placemarkStore.addPlacemark(request.payload);
         if(!placemarkObj){
           return Boom.badImplementation("Error while creating placemark");
         }
-        return h.response(placemark).code(201);
+        return h.response(placemarkObj).code(201);
       }catch(err){
+        console.log(err);
         return Boom.serverUnavailable("Database error");
       }
     },
