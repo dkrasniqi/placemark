@@ -8,14 +8,13 @@ suite("Authentication API tests", async () => {
   setup(async () => {
     placemarkService.clearAuth();
     await placemarkService.createUser(donald);
-    await placemarkService.authenticate(donald);
+    await placemarkService.authenticate(donaldCredentials);
     await placemarkService.deleteAllUsers();
   });
 
   test("authenticate", async () => {
     const returnedUser = await placemarkService.createUser(donald);
     const response = await placemarkService.authenticate(donaldCredentials);
-    console.log(response);
     assert(response.success);
     assert.isDefined(response.token);
   });
