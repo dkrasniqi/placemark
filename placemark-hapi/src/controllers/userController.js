@@ -101,18 +101,19 @@ export const userController = {
       payload: changeNameSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        return h.view("settings", { title: "Error while changing Name", errors: error.details}).takeover().code(400);
+        const loggedInUser = request.auth.credentials;
+        return h.view("settings", { title: "Error while changing Name", errors: error.details, user:user}).takeover().code(400);
       }
     },
     handler: async function(request, h){
         const newFirst = request.payload.newFirstName;
         const newLast = request.payload.newLastName;
-        const userId = request.auth.credentials._id
-        await db.userStore.changeUserName(userId, newFirst, newLast);   
+        const user = request.auth.credentials;
+        await db.userStore.changeUserName(user._id, newFirst, newLast);   
         const success = [{
           message:  "Successfully changed name"
         }];
-        return h.view("settings", {title: "Changed name",  success: success});
+        return h.view("settings", {title: "Changed name",  success: success, user: user});
     },
   },
 
@@ -121,33 +122,35 @@ export const userController = {
       payload: changeMailSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        return h.view("settings", { title: "Error while changing Mail", errors: error.details}).takeover().code(400);
+        const loggedInUser = request.auth.credentials;
+        return h.view("settings", { title: "Error while changing Mail", errors: error.details, user:loggedInUser}).takeover().code(400);
       }
     },
     handler:  async function(request, h){
       const oldMail = request.payload.oldMail;
       const newMail = request.payload.newMail;
       const newMailConfirm = request.payload.newMailConfirm;
-      const user = await db.userStore.getUserById(request.auth.credentials._id);
+      const loggedInUser = request.auth.credentials
+      const user = await db.userStore.getUserById(loggedInUser._id);
 
       if(user.email !== oldMail){
         const error =[{
           message: "Old E-Mail is not correct"
         }];
-        return h.view("settings", {title: "Error", errors: error}).takeover().code(400);
+        return h.view("settings", {title: "Error", errors: error, user: loggedInUser}).takeover().code(400);
       }
 
       if(newMail !== newMailConfirm){
         const error =[{
           message: "New E-Mails do not match"
         }];
-        return h.view("settings", {title: "Error", errors: error}).takeover().code(400);
+        return h.view("settings", {title: "Error", errors: error, user:loggedInUser}).takeover().code(400);
       }
       await db.userStore.changeUserMail(user._id, newMail);
       const success = [{
         message: "Successfully changed E-Mail"
       }]
-      return h.view("settings", {title: "Changed email", success: success});
+      return h.view("settings", {title: "Changed email", success: success, user:loggedInUser});
 
     },
   },
@@ -157,34 +160,36 @@ export const userController = {
       payload: changePassSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        return h.view("settings", { title: "Error while changing Password", errors: error.details}).takeover().code(400);
+        const loggedInUser = request.auth.credentials;
+        return h.view("settings", { title: "Error while changing Password", errors: error.details, user: user}).takeover().code(400);
       }
     },
     handler: async function(request, h){
       const oldPass = request.payload.oldPass;
       const newPass = request.payload.newPass;
       const newPassConfirm = request.payload.newPassConfirm;
-      const user = await db.userStore.getUserById(request.auth.credentials._id);
+      const loggedInUser = request.auth.credentials;
+      const user = await db.userStore.getUserById(loggedInUser._id);
 
       if(oldPass !== user.password){
         const error =[{
           message: "Old password is wrong"
         }];
-        return h.view("settings", {title: "Error", errors:error});
+        return h.view("settings", {title: "Error", errors:error, user: loggedInUser});
       }
       if(newPass !== newPassConfirm){
         const error =[{
           message: "New passwords do not match"
         }];
         
-        return h.view("settings",  {title: "Error", errors: error});
+        return h.view("settings",  {title: "Error", errors: error, user:loggedInUser});
       }
       await db.userStore.changeUserPass(user._id, newPass);
       const success = [{
         message: "Successfully changed Password"
       }];
 
-      return h.view("settings", {title: "Changed Password", success: success});
+      return h.view("settings", {title: "Changed Password", success: success, user:loggedInUser});
 
     },
   },

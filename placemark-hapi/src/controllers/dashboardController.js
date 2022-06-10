@@ -22,7 +22,7 @@ export const dashboardController = {
       payload: PlacemarkSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        return h.view("welcome", { title: "Placemark error", errors: error.details}).takeover().code(400);
+        return h.view("dashboard", { title: "Placemark error", errors: error.details}).takeover().code(400);
       }},
     handler: async function (request, h){
       const user = request.auth.credentials;

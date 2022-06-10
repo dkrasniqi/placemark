@@ -1,8 +1,8 @@
 {{> loggedInNavigator active="settings"}}
 
-<section class="section">
+<section class="section ">
   <h1 class="title">User Settings</h1>
-  <form action="/changename" method="POST">
+  <form action="/changename" method="POST" class="box">
     <label class="label">Name</label>
     <div class="field is-horizontal">
       <div class="field-body">
@@ -20,8 +20,8 @@
   </form>
 
 
-  <form action="/changemail" method="POST">
-    <label class="label">Mail</label>
+  <form action="/changemail" method="POST" class="box">
+    <label class="label">E-Mail</label>
     <div class="field is-horizontal">
       <div class="field-body">
         <div class="field">
@@ -40,7 +40,7 @@
     </div>
   </form>
 
-  <form action="/changepass" method="POST">
+  <form action="/changepass" method="POST" class="box">
     <label class="label">Password</label>
     <div class="field is-horizontal">
       <div class="field-body">
@@ -59,7 +59,6 @@
       <button class="button is-link">Change Password</button>
     </div>
   </form>
-  <br>
   {{> error}}
   {{> success}}
 </section>

@@ -33,12 +33,12 @@ export const placemarkApi = {
       try{
         const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
         if(!placemark){
-          return Boom.notFound("No placemark with this id");
+          return Boom.notFound("No existing placemark with this id");
         }
         return placemark;
 
       }catch(err){
-        return Boom.serverUnavailable("Database error");
+        return Boom.serverUnavailable("No existing placemark with this id");
       }
     },
     tags: ["api"],
@@ -98,13 +98,13 @@ export const placemarkApi = {
       try{
         const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
         if(!placemark){
-          return Boom.notFound("No placemark with this id");
+          return Boom.notFound("No existing placemark with this id");
         }
         await db.placemarkStore.deletePlacemarkById(placemark._id);
         return h.response().code(204);
 
       }catch(err){
-        return Boom.serverUnavailable("Database error");
+        return Boom.serverUnavailable("No existing placemark with this id");
       }
     },
     tags: ["api"],

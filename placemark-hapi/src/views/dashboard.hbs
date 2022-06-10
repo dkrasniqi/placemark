@@ -1,9 +1,14 @@
 {{> loggedInNavigator active="dashboard"}}
 
-<section class="section columns is-vcentered">
+<section class="section columns is-hcentered">
   <div class="column has-text-centered">
     {{> list-placemarks}}
-    {{> add-placemark}}
   </div>
-  
+  <div class="column">
+    {{> add-placemark}}
+    <br>
+    {{> error}}
+  </div>
+  <br>
 </section>
+
