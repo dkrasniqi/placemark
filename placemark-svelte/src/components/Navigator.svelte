@@ -1,0 +1,23 @@
+<script>
+  import logo from "../assets/logo.png";
+</script>
+
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="column">
+      <a href="/#/">
+        <img src={logo} alt="logo" >
+      </a>
+    </div>
+  </div>
+  <div class="navbar-menu" id="navMenu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+           <a class="button" id="login" href="/#/login"> Log in </a>
+           <a class="button" id="signup" href="/#/signup"> Sign up </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
