@@ -1,9 +1,7 @@
-/* eslint-disable prefer-template */
-/* eslint-disable dot-notation */
 import axios from "axios";
 
 export class PlacemarkService  {
-  baseUrl = "http://localhost:4000";
+  baseUrl = "";
 
   constructor(baseUrl){
     this.baseUrl = baseUrl;

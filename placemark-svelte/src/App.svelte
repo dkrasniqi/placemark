@@ -13,7 +13,7 @@
     "/signup": Signup,
   }
 
-  setContext("PlacemarkService", new PlacemarkService("http://localhost:4000"));
+  setContext("PlacemarkService", new PlacemarkService("https://calm-sierra-28993.herokuapp.com"));
 </script>
 
 <div class="container">
