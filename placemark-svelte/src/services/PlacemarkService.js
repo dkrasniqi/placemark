@@ -1,10 +1,23 @@
+// @ts-nocheck
 import axios from "axios";
+import { user } from "../stores.js";
+import jwt_decode from "jwt-decode";
 
 export class PlacemarkService  {
   baseUrl = "";
 
   constructor(baseUrl){
     this.baseUrl = baseUrl;
+    const placemarkCredentials = localStorage.placemark;
+    if (placemarkCredentials) {
+      const savedUser = JSON.parse(placemarkCredentials)
+      user.set({
+        email: savedUser.email,
+        id: savedUser.id,
+        token: savedUser.token,
+      });
+      axios.defaults.headers.common["Authorization"] = "Bearer " + savedUser.token;
+    }
   }
 
   async login(email, password) {
@@ -12,6 +25,18 @@ export class PlacemarkService  {
       const response = await axios.post(`${this.baseUrl}/api/users/authenticate`, {email, password});
       axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.token;
       if (response.data.success) {
+
+        const token = response.data.token;
+        const decoded = jwt_decode(token);
+        const userId = decoded.id;
+        
+        user.set({
+          email: email,
+          id: userId,
+          token: response.data.token,
+        });
+
+        localStorage.placemark = JSON.stringify({email:email, token:response.data.token, id:userId});
         return true;
       }
       return false;
@@ -36,6 +61,38 @@ export class PlacemarkService  {
   }
 
   async logout() {
+    user.set({
+      email: "",
+      id: "",
+      token: "",
+    });
     axios.defaults.headers.common["Authorization"] = "";
+    localStorage.removeItem("placemark");
+  }
+
+  async addPlacemark(name, description, lat, long, categorie, userid) {
+    const data = {
+      name : name,
+      description: description,
+      lat: lat,
+      long: long,
+      categorie: categorie,
+      userid: userid,
+    }
+    try{
+      const response = await axios.post(`${this.baseUrl}/api/placemarks`, data);
+      return true;
+    }catch(error){
+      return false;
+    }
+  }
+
+  async getUserPlacemarks(id){
+    const response =  await axios.get(`${this.baseUrl}/api/placemarks`);
+    const userPlacemarks = response.filter(function (e) {
+      return e.userid ==  id;
+    });
+    return userPlacemarks;
+
   }
 }

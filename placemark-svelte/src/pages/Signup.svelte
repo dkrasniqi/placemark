@@ -1,21 +1,37 @@
 <script>
 import Navigator from "../components/Navigator.svelte";
 import { push } from "svelte-spa-router";
+import {getContext} from "svelte";
+
 
 let firstName ="";
 let lastName ="";
 let email = "";
 let password = "";
+let error ="";
+
+const placemarkService = getContext("PlacemarkService");
 
 async function signup() {
-    push("/");
+  let success = await placemarkService.signup(firstName, lastName, email, password);
+  if(success){
+    push("/login");
   }
+  else{
+    firstName ="";
+    lastName="";
+    email = "";
+    password ="";
+    error="Error while signing up";
+  }
+}
+
 </script>
 <Navigator/>
 
 <section class="section">
   <h1 class="title">Sign up</h1>
-  <form on:submit|preventDefault={signup} action="/register" method="POST" class="box">
+  <form on:submit|preventDefault={signup} class="box">
     <label class="label" for="firstName">Name</label>
     <div class="field is-horizontal">
       <div class="field-body">
@@ -65,6 +81,15 @@ async function signup() {
       </button>
     </div>
   </form>
+  {#if error}
+
+  <div class="notification is-danger">
+    <p> There was a problem... </p>
+    <ul>
+        <li>{error}</li>
+    </ul>
+  </div>
+{/if}
 </section>
 
 

@@ -1,12 +1,11 @@
 <script>
 import Navigator from "../components/Navigator.svelte";
-import Error from "../components/Error.svelte";
 import {push} from "svelte-spa-router";
 import {getContext} from "svelte";
 
 let email ="";
 let password ="";
-let error = {message: ""};
+let error = "";
 
 const placemarkService = getContext("PlacemarkService")
 
@@ -18,7 +17,7 @@ async function login() {
   else{
     email = "";
     password ="";
-    error.message ="E-Mail or password wrong";
+    error ="E-Mail or password wrong";
   }
     
   }
@@ -54,6 +53,14 @@ async function login() {
       </button>
     </div>
   </form>
-  <Error errors={error}/>
+  {#if error}
+
+  <div class="notification is-danger">
+    <p> There was a problem... </p>
+    <ul>
+        <li>{error}</li>
+    </ul>
+  </div>
+{/if}
 </section>
 

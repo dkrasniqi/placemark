@@ -48,6 +48,26 @@ export const placemarkApi = {
     response: { schema: PlacemarkSpecPlus, failAction: validationError },
   },
 
+  findPlacemarksByUser:{
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function(request, h){
+      try{
+        const placemarks = await db.placemarkStore.getUserPlacemarks(request.params.id);
+        if(!placemarks){
+          return Boom.notFound("No existing placemark with this userid");
+        }
+        return placemarks;
+
+      }catch(err){
+        return Boom.serverUnavailable("No existing placemarks with this userid");
+      }
+    },
+
+  },
+
+
   create:{
     auth: {
       strategy: "jwt",

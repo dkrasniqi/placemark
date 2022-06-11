@@ -1,5 +1,9 @@
 <script>
   import Navigator from "../components/Navigator.svelte";
+  import {getContext} from "svelte";
+  
+  const placemarkService = getContext("PlacemarkService");
+  placemarkService.logout();
 </script>
 <Navigator/>
 <section class="section columns is-vcentered">
