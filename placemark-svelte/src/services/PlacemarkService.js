@@ -3,27 +3,21 @@
 import axios from "axios";
 
 export class PlacemarkService  {
-  baseUrl = "";
+  baseUrl = "http://localhost:4000";
 
   constructor(baseUrl){
     this.baseUrl = baseUrl;
   }
 
-  async login(email, password){
-    const data = {
-      email : email,
-      password: password,
-    };
-    
-    try{
-      const response = await axios.post(`${this.baseUrl}/api/users/authenticate`, data);
+  async login(email, password) {
+    try {
+      const response = await axios.post(`${this.baseUrl}/api/users/authenticate`, {email, password});
       axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.token;
-      if(response.data.success){
+      if (response.data.success) {
         return true;
       }
       return false;
-      
-    }catch(error){
+    } catch (error) {
       return false;
     }
   }

@@ -1,12 +1,26 @@
 <script>
 import Navigator from "../components/Navigator.svelte";
-import { push } from "svelte-spa-router";
+import Error from "../components/Error.svelte";
+import {push} from "svelte-spa-router";
+import {getContext} from "svelte";
 
 let email ="";
 let password ="";
+let error = {message: ""};
+
+const placemarkService = getContext("PlacemarkService")
 
 async function login() {
-    push("/donate");
+  let success = await placemarkService.login(email, password);
+  if(success){
+    push("/dashboard");
+  }
+  else{
+    email = "";
+    password ="";
+    error.message ="E-Mail or password wrong";
+  }
+    
   }
 
 </script>
@@ -40,6 +54,6 @@ async function login() {
       </button>
     </div>
   </form>
-
+  <Error errors={error}/>
 </section>
 

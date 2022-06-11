@@ -31,8 +31,8 @@ async function init() {
   });
   const swaggerOptions = {
     info: {
-      title: "Playtime API",
-      version: "0.1",
+      title: "Placemark API",
+      version: "0.5",
     },
     securityDefinitions: {
       jwt: {
