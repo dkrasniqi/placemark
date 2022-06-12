@@ -65,6 +65,11 @@ export const placemarkApi = {
         return Boom.serverUnavailable("No existing placemarks with this userid");
       }
     },
+    tags: ["api"],
+    description: "Get placemarks of a user",
+    notes: "Returns placemarks",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+    response: { schema: PlacemarkArray, failAction: validationError },
 
   },
 

@@ -43,17 +43,30 @@ export const changeNameSpec = Joi.object().keys({
   newLastName: Joi.string().required(),
 }).label("ChangeNameSpec");
 
+export const changeNameSpecApi = changeNameSpec.keys({
+  id: IdSpec.required(),
+}).label("ChangeNameSpecApi")
+
 export const changeMailSpec = Joi.object().keys({
   oldMail: Joi.string().email().required() ,
   newMail: Joi.string().email().required(),
   newMailConfirm: Joi.string().email().required(),
 }).label("ChangeMailSpec");
 
+export const changeMailSpecApi= changeMailSpec.keys({
+  id: IdSpec.required(),
+}).label("ChangeMailSpecApi");
+
+
 export const changePassSpec = Joi.object().keys({
   oldPass: Joi.string().required(),
   newPass: Joi.string().required(),
   newPassConfirm: Joi.string().required(),
 }).label("ChangePassSpec");
+
+export const changePassSpecApi = changePassSpec.keys({
+  id: IdSpec.required(),
+})
 
 export const JwtAuth = Joi.object()
 .keys({
