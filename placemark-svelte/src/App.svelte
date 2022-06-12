@@ -4,6 +4,7 @@
   import Signup from "./pages/Signup.svelte";
   import Dashboard from "./pages/Dashboard.svelte";
   import Settings from "./pages/Settings.svelte";
+  import Placemark from "./pages/Placemark.svelte";
 
   import Router from "svelte-spa-router";
   import { PlacemarkService } from "./services/PlacemarkService.js"
@@ -16,6 +17,7 @@
     "/logout": Welcome,
     "/dashboard": Dashboard,
     "/settings": Settings,
+    "/placemark/:id": Placemark,
   }
 
   setContext("PlacemarkService", new PlacemarkService("https://calm-sierra-28993.herokuapp.com"));

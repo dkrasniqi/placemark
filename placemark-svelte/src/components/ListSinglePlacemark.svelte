@@ -1,20 +1,21 @@
 <script>
-  import { push } from "svelte-spa-router";
   import {getContext} from "svelte";  
+  export let id="";
   const placemarkService = getContext("PlacemarkService");
   const user = JSON.parse(localStorage.placemark);
+  
+  let placemark={};
 
-  let placemarks = [];
+  getPlacemark();
 
-  getPlacemarks();
-
-  async function  getPlacemarks(){
-    const result = await placemarkService.getUserPlacemarks(user.id);
-    placemarks = result;
+  async function  getPlacemark(){
+    const result = await placemarkService.getPlacemarkById(id);
+    placemark = result;
   }
-	
 
 </script>
+
+
 <table class="table is-fullwidth">
   <thead>
     <tr>
@@ -23,12 +24,9 @@
       <th>Latitude</th>
       <th>Longitude</th>
       <th>Categorie</th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
-    {#each placemarks as placemark}
       <tr>
         <td>
           {placemark.name}
@@ -46,17 +44,7 @@
          <td>
           {placemark.categorie}
         </td>
-        <td>
-         <a href="#/placemark/{placemark._id}" class="ui icon button">
-            <i class="fas fa-info"></i>
-          </a>   
-        </td>
-        <td>
-         <a href="#/dashboard/deleteplacemark/{placemark._id}" class="ui icon button">
-            <i class="fas fa-trash"></i>
-          </a>
-        </td>
       </tr>
-    {/each}
+    
   </tbody>
 </table>

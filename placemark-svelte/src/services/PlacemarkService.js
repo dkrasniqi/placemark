@@ -89,8 +89,13 @@ export class PlacemarkService  {
 
   async getUserPlacemarks(id){
     const response =  await axios.get(`${this.baseUrl}/api/placemarks/user/${id}`);
-    console.log(response.data);
+    
     return response.data;
 
+  }
+
+  async getPlacemarkById(id){
+    const response = await axios.get(`${this.baseUrl}/api/placemarks/${id}`);
+    return response.data;
   }
 }
