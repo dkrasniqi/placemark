@@ -1,23 +1,59 @@
 <script>
   import LoggedInNavigator from "../components/LoggedInNavigator.svelte";
   import {push} from "svelte-spa-router"
+  import {getContext} from "svelte";
+  const placemarkService = getContext("PlacemarkService");
 
   const loggedInUser = localStorage.getItem("placemark");
+  const user = JSON.parse(localStorage.placemark);
 
   if(!loggedInUser){
     push("/login");
   }
 
   let newFirstName, newLastName;
-  let oldPass, newPass, newPassConfirm;
-  let oldMail, newMail, newMailConfirm;
+  let oldPass, newPass, newPassConfirm ="";
+  let oldMail, newMail, newMailConfirm="";
+  let error="";
+
   async function changeName(){
+    const success = await placemarkService.changeName(user.id, newFirstName, newLastName);
+    if(success){
+      push("/settings");
+    }
+    else{
+    newFirstName ="";
+    newLastName="";
+    error="Error while changing name";
+  }
 
   };
   async function changeMail(){
+    const success = await placemarkService.changeMail(user.id, oldMail, newMail, newMailConfirm);
+    if(success){
+      push("/settings");
+    }
+    else{
+      oldMail = "";
+      newMail="";
+      newFirstName="";
+      error="Error while changing Mail";
+
+    }
 
   };
   async function changePass (){
+    const success = await placemarkService.changePass(user.id, oldPass, newPass, newPassConfirm);
+    if(success){
+      push("/settings");
+    }
+    else{
+      oldPass = "";
+      newPass="";
+      newPassConfirm="";
+      error="Error while changing Password";
+
+    }
 
   };
 </script>
@@ -83,7 +119,14 @@
       <button class="button is-link">Change Password</button>
     </div>
   </form>
- <!-- {{> error}}
-  {{> success}} -->
+  {#if error}
+
+  <div class="notification is-danger">
+    <p> There was a problem... </p>
+    <ul>
+        <li>{error}</li>
+    </ul>
+  </div>
+{/if}
 </section>
 

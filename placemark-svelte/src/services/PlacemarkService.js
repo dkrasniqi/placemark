@@ -98,4 +98,47 @@ export class PlacemarkService  {
     const response = await axios.get(`${this.baseUrl}/api/placemarks/${id}`);
     return response.data;
   }
+
+  async changeName(id, newFirstName, newLastName){
+    const data = {
+      id : id,
+      newFirstName: newFirstName,
+      newLastName: newLastName,
+    }
+    const response = await axios.post(`${this.baseUrl}/api/users/changeName`, data);
+    if(response.data){
+      return true;
+    }
+    return false;
+  }
+
+  async changeMail(id, oldMail, newMail, newMailConfirm){
+    const data = {
+      id : id,
+      oldMail: oldMail,
+      newMail: newMail,
+      newMailConfirm: newMailConfirm,
+    }
+    const response = await axios.post(`${this.baseUrl}/api/users/changeMail`, data);
+    if(response.data){
+      return true;
+    }
+    return false;
+  }
+
+  async changePass(id, oldPass, newPass, newPassConfirm){
+  const data = {
+    id : id,
+    oldPass: oldPass,
+    newPass: newPass,
+    newPassConfirm: newPassConfirm,
+
+  }
+  const response = await axios.post(`${this.baseUrl}/api/users/changePass`, data);
+  if(response.data){
+    return true;
+  }
+  return false;
+
+}
 }

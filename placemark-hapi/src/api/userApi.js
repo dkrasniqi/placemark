@@ -1,7 +1,7 @@
 /* eslint-disable prefer-destructuring */
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
-import { UserSpec, UserSpecPlus, UserCredentialsSpec, UserArray, IdSpec, JwtAuth, changeNameSpecApi, changePassSpecApi} from "../models/joi.js";
+import { UserSpec, UserSpecPlus, UserCredentialsSpec, UserArray, IdSpec, JwtAuth, changeNameSpecApi, changePassSpecApi, changeMailSpecApi} from "../models/joi.js";
 import { validationError } from "./logger.js";
 import { createToken } from "./jwt-utils.js";
 
@@ -163,7 +163,7 @@ export const userApi = {
     tags: ["api"],
     description: "Change mail of",
     notes: "Returns the udpated user",
-    validate: { payload: UserSpec , failAction: validationError },
+    validate: { payload: changeMailSpecApi , failAction: validationError },
     response: { schema: UserSpecPlus, failAction: validationError },
   },
 
