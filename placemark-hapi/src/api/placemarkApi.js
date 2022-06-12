@@ -55,6 +55,7 @@ export const placemarkApi = {
     handler: async function(request, h){
       try{
         const placemarks = await db.placemarkStore.getUserPlacemarks(request.params.id);
+        console.log(placemarks);
         if(!placemarks){
           return Boom.notFound("No existing placemark with this userid");
         }

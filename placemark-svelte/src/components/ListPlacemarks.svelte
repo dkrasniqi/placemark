@@ -1,16 +1,18 @@
 <script>
   import { push } from "svelte-spa-router";
   import {getContext} from "svelte";  
-  import { onMount } from 'svelte';
   const placemarkService = getContext("PlacemarkService");
+  const user = JSON.parse(localStorage.placemark);
 
   let placemarks = [];
 
-  onMount(() => {
-		const result = placemarkService.getUserPlacemarks(localStorage.id);
-    console.log(result);
+  getPlacemarks();
+
+  async function  getPlacemarks(){
+    const result = await placemarkService.getUserPlacemarks(user.id);
     placemarks = result;
-	})
+  }
+	
 
 </script>
 <table class="table is-fullwidth">
@@ -26,23 +28,23 @@
     </tr>
   </thead>
   <tbody>
-    {#each placemarks as {name,description, lat, long, categorie, }}
+    {#each placemarks as placemark}
       <tr>
         <td>
-          {{name}}
+          {placemark.name}
         </td>
         <td>
-          {{description}}
+          {placemark.description}
         </td>
 
         <td>
-          {{lat}}
+          {placemark.lat}
         </td>
         <td>
-          {{long}}
+          {placemark.long}
         </td>
          <td>
-          {{categorie}}
+          {placemark.categorie}
         </td>
         <td>
        <!---  <a href="/placemark/{{_id}}" class="ui icon button">

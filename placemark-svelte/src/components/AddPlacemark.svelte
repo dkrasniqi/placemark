@@ -8,11 +8,11 @@
   let lat  ="";
   let long ="";
   let categorie="";
-  const userid = localStorage.id;
   let error ="";
+  const credentials = JSON.parse(localStorage.placemark);
 
   async function addplacemark(){
-    let success = await placemarkService.addPlacemark(name, description, lat, long, categorie, userid);
+    let success = await placemarkService.addPlacemark(name, description, lat, long, categorie, credentials.id);
     if(success){
     push("/dashboard");
   }
