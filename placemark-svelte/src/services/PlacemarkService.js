@@ -15,6 +15,7 @@ export class PlacemarkService  {
         email: savedUser.email,
         id: savedUser.id,
         token: savedUser.token,
+        role: savedUser.role,
       });
       axios.defaults.headers.common["Authorization"] = "Bearer " + savedUser.token;
     }
@@ -29,14 +30,16 @@ export class PlacemarkService  {
         const token = response.data.token;
         const decoded = jwt_decode(token);
         const userId = decoded.id;
+        const userRole = decoded.role;
         
         user.set({
           email: email,
           id: userId,
+          role: userRole,
           token: response.data.token,
         });
 
-        localStorage.placemark = JSON.stringify({email:email, token:response.data.token, id:userId});
+        localStorage.placemark = JSON.stringify({email:email, token:response.data.token, id:userId, role: userRole});
         return true;
       }
       return false;
