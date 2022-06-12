@@ -3,14 +3,14 @@
   import ListSinglePlacemark from "../components/ListSinglePlacemark.svelte"
 
   export let params = {}  ;
-  let playlistId = params.id
+  let placemarkId = params.id
   
 </script>
 <LoggedInNavigator/>
 
 <section class="section columns is-vcentered">
   <div class="column has-text-centered">
-    <ListSinglePlacemark id={playlistId}/>
+    <ListSinglePlacemark id={placemarkId}/>
   </div>
   <div class="column">
    <!-- {{> playlist-image }}-->

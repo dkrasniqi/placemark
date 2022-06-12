@@ -141,4 +141,13 @@ export class PlacemarkService  {
   return false;
 
 }
+
+async deletePlacemark(id){
+  try{
+  const response = await axios.delete(`${this.baseUrl}/api/placemarks/${id}`);
+  return true;
+  }catch(error){
+    return false;
+  }
+}
 }

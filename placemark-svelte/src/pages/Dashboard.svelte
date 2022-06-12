@@ -22,7 +22,6 @@
   <div class="column">
     <AddPlacemark/>
     <br>
-    <!--{{> error}}-->
   </div>
   <br>
 </section>
