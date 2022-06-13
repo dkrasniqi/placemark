@@ -153,4 +153,40 @@ async deletePlacemark(id){
     return false;
   }
 }
+
+async getAllUsers(){
+  try{
+    const response = await axios.get(`${this.baseUrl}/api/users`);
+    if(response.data){
+      return response.data;
+    }
+   return false;
+  }
+  catch(error){
+    return false;
+  }
+}
+
+async getAllPlacemarks(){
+  try{
+    const response = await axios.get(`${this.baseUrl}/api/placemarks`)
+    if(response.data){
+      return response.data;
+    }
+    return false;
+
+  }catch(error){
+    return false;
+  }
+}
+
+async deleteUser(id){
+  try{
+    const response = await axios.delete(`${this.baseUrl}/api/users/${id}`);
+    return true;
+
+  }catch(error){
+    return false;
+  }
+}
 }
