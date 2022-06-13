@@ -8,7 +8,7 @@
 
   getPlacemarks();
 
-  async function  getPlacemarks(){
+  export async function  getPlacemarks(){
     const result = await placemarkService.getUserPlacemarks(user.id);
     placemarks = result;
   }

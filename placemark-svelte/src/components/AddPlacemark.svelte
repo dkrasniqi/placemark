@@ -1,7 +1,8 @@
 <script>
   import { push } from "svelte-spa-router";
-  import {getContext} from "svelte";  
+  import {createEventDispatcher, getContext} from "svelte";  
   const placemarkService = getContext("PlacemarkService");
+  const dispatch = createEventDispatcher();
 
   let name ="";
   let description ="";
@@ -13,8 +14,18 @@
 
   async function addplacemark(){
     let success = await placemarkService.addPlacemark(name, description, lat, long, categorie, credentials.id);
+    const message = "Successfully added placemark"
     if(success){
-    push("/dashboard");
+      const data = {
+        name: name, 
+        description: description,
+        lat: lat,
+        long: long,
+        categorie: categorie
+      }
+      dispatch("message", {
+        placemark: data,
+      });
   }
   else{
     name ="";

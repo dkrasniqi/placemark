@@ -18,7 +18,8 @@
           {#if user.role === "admin"}
           <a id="admin-dashboard" class="button" href="/#/admin/dashboard">Admin Dashbooard</a>
           {/if}
-          <a id="dashboard" class="button" href="/#/dashboard"> Dashboard </a>
+          <a id="dashboard" class="button" href="/#/dashboard">Dashboard</a>
+          <a id="map" class="button" href="/#/map">Map</a>
           <a id="settings" class="button" href="/#/settings">Settings</a>
           <a id="logout" class="button" href="/#/logout"> Logout </a>
         </div>
