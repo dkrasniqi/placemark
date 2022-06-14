@@ -138,4 +138,35 @@ export const placemarkApi = {
     notes: "Returns user",
     validate: { params: { id: IdSpec }, failAction: validationError },
   },
+
+  uploadImage: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function(request, h) {
+      try {
+        const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
+        const file = request.payload.imagefile;
+        if (Object.keys(file).length > 0) {
+          const url = await imageStore.uploadImage(request.payload.imagefile);
+          placemark.img = url;
+          db.placemarkStore.updatePlacemark(placemark);
+        }
+        return url;
+      } catch (err) {
+        console.log(err);
+        return Boom.serverUnavailable("Error while uploading picture");
+      }
+    
+    },
+    payload: {
+      multipart: true,
+      output: "data",
+      maxBytes: 209715200,
+      parse: true
+    },
+    tags: ["api"],
+    description: "Add photo to placemark",
+    notes: "Returns Url of photo",
+  }
 };
