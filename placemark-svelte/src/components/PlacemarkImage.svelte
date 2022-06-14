@@ -7,8 +7,8 @@
   export let placemarkid;
   
   async function upload(){
-    const response = placemarkService.uploadPicture(placemarkid, file[0]);
-    console.log(file[0]);
+    const response = await placemarkService.uploadPicture(placemarkid, file[0]);
+    console.log(response)
 
   }
 

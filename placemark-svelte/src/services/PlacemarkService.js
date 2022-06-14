@@ -192,10 +192,18 @@ async deleteUser(id){
 async uploadPicture(id, imagefile){
   
   try{
-    const response = await axios.post(`${this.baseUrl}/api/placemark/${id}/uploadimage`, imagefile);
+    let formdata = new FormData();
+    formdata.append("image", imagefile)
+
+
+    const data = {
+      formdata : formdata
+    }
+    const response = await axios.post(`${this.baseUrl}/api/placemark/${id}/uploadimage`, data );
     return response;
   }
-  catch{
+  catch(err){
+    console.log(err)
     return false;
 
   }

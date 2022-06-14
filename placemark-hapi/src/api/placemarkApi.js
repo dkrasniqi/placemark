@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
 import { PlacemarkSpec, PlacemarkSpecPlus, PlacemarkArray, IdSpec } from "../models/joi.js";
@@ -147,11 +148,13 @@ export const placemarkApi = {
     handler: async function(request, h) {
       try {
         const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
-        const file = request.payload.imagefile;
+        let formdata = new FormData();
+        formdata = request.payload.formdata;
+        const imagefile = formdata.get("image")
         console.log(placemark);
         console.log(request.params.id);
-        console.log(request.payload.imagefile);
-          const url = await imageStore.uploadImage(request.payload.imagefile);
+        console.log(imagefile);
+          const url = await imageStore.uploadImage(imagefile);
           placemark.img = url;
           db.placemarkStore.updatePlacemark(placemark);
           return url;
