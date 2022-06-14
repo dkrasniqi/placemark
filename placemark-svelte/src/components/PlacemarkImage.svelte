@@ -1,21 +1,13 @@
 <script>
   import {getContext} from "svelte"; 
-  const imageservice = getContext("ImageService");
+  const placemarkService = getContext("PlacemarkService");
   const user = JSON.parse(localStorage.placemark);
 
   let files;
   export let placemarkid;
   
   async function upload(){
-    console.log("inside funciton")
-    console.log("inside upload;")
-    console.log("file:" + files[0]);
-    const url = await imageservice.uploadImage(files[0])
-    if (Object.keys(files[0]).length > 0) {
-         
-        }
-    
-
+    const response = placemarkService.uploadPicture(placemarkid, files[0]);
   }
 
 

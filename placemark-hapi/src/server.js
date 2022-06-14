@@ -29,8 +29,10 @@ async function init() {
   const server = Hapi.server({
     port: process.env.PORT || 3000,
     routes: {
-      cors: true
-  } });
+      cors: true,
+    }
+    
+  });
   const swaggerOptions = {
     info: {
       title: "Placemark API",

@@ -189,4 +189,18 @@ async deleteUser(id){
     return false;
   }
 }
+async uploadPicture(id, imagefile){
+  const data = {
+    imagefile: imagefile
+  }
+
+  try{
+    const response = await axios.post(`${this.baseUrl}/api/placemark/${id}/uploadimage`, data);
+    return response;
+  }
+  catch{
+    return false;
+
+  }
+}
 }

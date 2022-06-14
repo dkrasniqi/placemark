@@ -15,7 +15,6 @@
 
   import Router from "svelte-spa-router";
   import { PlacemarkService } from "./services/PlacemarkService.js";
-  import { ImageService } from "./services/ImageService";
  
   import { setContext} from "svelte";
 
@@ -36,9 +35,7 @@
   
   }
 
-  setContext("PlacemarkService", new PlacemarkService("https://calm-sierra-28993.herokuapp.com"));
-  setContext("ImageService", new ImageService());
-</script>
+  setContext("PlacemarkService", new PlacemarkService("https://calm-sierra-28993.herokuapp.com"));</script>
 
 <div class="container">
   <Router {routes}/>

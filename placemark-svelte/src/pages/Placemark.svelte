@@ -1,6 +1,7 @@
 <script>
   import LoggedInNavigator from "../components/LoggedInNavigator.svelte";
-  import ListSinglePlacemark from "../components/ListSinglePlacemark.svelte"
+  import ListSinglePlacemark from "../components/ListSinglePlacemark.svelte";
+  import PlacemarkImage from "../components/PlacemarkImage.svelte";
 
   export let params = {}  ;
   let placemarkId = params.id
@@ -13,6 +14,6 @@
     <ListSinglePlacemark id={placemarkId}/>
   </div>
   <div class="column">
-   <!-- {{> playlist-image }}-->
+   <PlacemarkImage placemarkid={placemarkId}/>
   </div>
 </section>
