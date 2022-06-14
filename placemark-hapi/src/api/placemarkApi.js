@@ -3,6 +3,7 @@ import { db } from "../models/db.js";
 import { PlacemarkSpec, PlacemarkSpecPlus, PlacemarkArray, IdSpec } from "../models/joi.js";
 import { validationError } from "./logger.js";
 import { decodeToken } from "./jwt-utils.js";
+import { imageStore } from "../models/image-store.js";
 
 export const placemarkApi = {
   find: {
