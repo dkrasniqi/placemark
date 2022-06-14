@@ -148,6 +148,9 @@ export const placemarkApi = {
       try {
         const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
         const file = request.payload.imagefile;
+        console.log(placemark);
+        console.log(request.params.id);
+        console.log(request.payload.imagefile);
           const url = await imageStore.uploadImage(request.payload.imagefile);
           placemark.img = url;
           db.placemarkStore.updatePlacemark(placemark);

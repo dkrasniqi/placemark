@@ -3,11 +3,13 @@
   const placemarkService = getContext("PlacemarkService");
   const user = JSON.parse(localStorage.placemark);
 
-  let files;
+  let file;
   export let placemarkid;
   
   async function upload(){
-    const response = placemarkService.uploadPicture(placemarkid, files[0]);
+    const response = placemarkService.uploadPicture(placemarkid, file[0]);
+    console.log(file[0]);
+
   }
 
 
@@ -22,7 +24,7 @@
     <form on:submit|preventDefault={upload} enctype="multipart/form-data">
       <div id="file-select" class="file has-name is-fullwidth">
         <label class="file-label"> 
-          <input bind:files class="file-input" name="imagefile" type="file" accept="image/png, image/jpeg">
+          <input bind:files={file} class="file-input" name="imagefile" type="file" accept="image/png, image/jpeg">
           <span class="file-cta">
             <span class="file-icon">
               <i class="fas fa-upload"></i>
@@ -33,8 +35,8 @@
             </span>
            </span>
           <span class="file-name">
-            {#if files}
-           {files[0].name}
+            {#if file}
+           {file[0].name}
            {/if}
           </span>
         </label>
