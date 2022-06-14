@@ -10,6 +10,7 @@
   import Admin from "./pages/Admin.svelte";
   import DeleteUser from "./pages/DeleteUser.svelte";
   import Map from "./pages/Map.svelte";
+  import Charts from "./pages/Charts.svelte";
 
 
   import Router from "svelte-spa-router";
@@ -29,6 +30,7 @@
     "/admin/dashboard/deleteuser/:id": DeleteUser, 
     "/admin/dashboard": Admin,
     "/map": Map,
+    "/charts": Charts,
   
   }
 

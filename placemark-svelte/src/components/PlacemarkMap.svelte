@@ -6,7 +6,7 @@
   const placemarkService = getContext("PlacemarkService");
   const user = JSON.parse(localStorage.placemark);
 
-  const mapConfig = {
+  export let mapConfig = {
     location: {lat: 49.002433, lng: 12.095984},
     zoom: 8,
     minZoom: 1,
