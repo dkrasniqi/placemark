@@ -1,5 +1,6 @@
 <script>
   import {getContext} from "svelte";  
+  import PlacemarkImage from "./PlacemarkImage.svelte";
   export let id="";
   const placemarkService = getContext("PlacemarkService");
   const user = JSON.parse(localStorage.placemark);
@@ -12,6 +13,8 @@
     const result = await placemarkService.getPlacemarkById(id);
     placemark = result;
   }
+
+  
 
 </script>
 
@@ -47,4 +50,7 @@
       </tr>
     
   </tbody>
+
 </table>
+
+<PlacemarkImage placemarkid={placemark.id}/>
