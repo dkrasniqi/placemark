@@ -8,7 +8,7 @@
 
   export let mapConfig = {
     location: {lat: 49.002433, lng: 12.095984},
-    zoom: 8,
+    zoom: 11,
     minZoom: 1,
   };
   let map = null;
