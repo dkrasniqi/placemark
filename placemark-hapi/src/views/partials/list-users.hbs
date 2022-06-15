@@ -1,35 +1,35 @@
- <table class="table is-fullwidth is-striped">
-    <thead>
+<table class="table is-fullwidth is-striped">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>E-Mail</th>
+      <th>Role</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each users}}
       <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>E-Mail</th>
-        <th>Role</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each users}}
-        <tr>
-          <td>
-            {{firstName}}
-          </td>
-          <td>
-            {{lastName}}
-          </td>
+        <td>
+          {{firstName}}
+        </td>
+        <td>
+          {{lastName}}
+        </td>
 
-          <td>
-            {{email}}
-          </td>
-          <td>
-            {{role}}
-          </td>
-          <td>
-            <a href="/admin/dashboard/deleteuser/{{_id}}" class="ui icon button">
-              <i class="fas fa-trash"></i>
-            </a> 
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-    </table>
+        <td>
+          {{email}}
+        </td>
+        <td>
+          {{role}}
+        </td>
+        <td>
+          <a href="/admin/dashboard/deleteuser/{{_id}}" class="ui icon button">
+            <i class="fas fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

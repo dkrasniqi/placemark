@@ -12,11 +12,10 @@
   import Map from "./pages/Map.svelte";
   import Charts from "./pages/Charts.svelte";
 
-
   import Router from "svelte-spa-router";
   import { PlacemarkService } from "./services/PlacemarkService.js";
- 
-  import { setContext} from "svelte";
+
+  import { setContext } from "svelte";
 
   let routes = {
     "/": Welcome,
@@ -28,15 +27,18 @@
     "/placemark/:id": Placemark,
     "/dashboard/deleteplacemark/:id": DeletePlacemark,
     "/admin/dashboard/deleteplacemark/:id": DeletePlacemarkAdmin,
-    "/admin/dashboard/deleteuser/:id": DeleteUser, 
+    "/admin/dashboard/deleteuser/:id": DeleteUser,
     "/admin/dashboard": Admin,
     "/map": Map,
     "/charts": Charts,
-  
-  }
+  };
 
-  setContext("PlacemarkService", new PlacemarkService("https://calm-sierra-28993.herokuapp.com"));</script>
+  setContext(
+    "PlacemarkService",
+    new PlacemarkService("https://calm-sierra-28993.herokuapp.com")
+  );
+</script>
 
 <div class="container">
-  <Router {routes}/>
+  <Router {routes} />
 </div>

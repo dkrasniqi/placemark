@@ -4,7 +4,6 @@ import { db } from "../models/db.js";
 
 const result = dotenv.config();
 
-
 export function createToken(user) {
   const payload = {
     id: user._id,

@@ -1,11 +1,11 @@
 /* eslint-disable prefer-destructuring */
 import { db } from "../models/db.js";
 
-export const adminController  =  {
+export const adminController = {
   listUser: {
     handler: async function (request, h) {
-      const loggedInUser =  request.auth.credentials;
-      if(loggedInUser.role !== "admin"){
+      const loggedInUser = request.auth.credentials;
+      if (loggedInUser.role !== "admin") {
         return h.response("Access denied");
       }
       const users = await db.userStore.getAllUsers();
@@ -15,34 +15,32 @@ export const adminController  =  {
         user: loggedInUser,
         users: users,
         placemarks: placemarks,
-      }
+      };
       return h.view("admin", data);
     },
   },
 
   deleteUser: {
-    handler: async function(request,  h){
-      const loggedInUser =  request.auth.credentials;
-      if(loggedInUser.role !== "admin"){
+    handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
+      if (loggedInUser.role !== "admin") {
         return h.response("Action denied");
       }
-      const id  = request.params.id;
+      const id = request.params.id;
       await db.userStore.deleteUserById(id);
       return h.redirect("/admin/dashboard");
-    }
+    },
   },
 
-  deletePlacemark:{
-    handler: async function(request, h){
+  deletePlacemark: {
+    handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
-      if(loggedInUser.role !== "admin"){
+      if (loggedInUser.role !== "admin") {
         return h.response("Action denied");
       }
       const id = request.params.id;
       await db.placemarkStore.deletePlacemarkById(id);
       return h.redirect("/admin/dashboard");
-    }
-  }
-
-
-}
+    },
+  },
+};

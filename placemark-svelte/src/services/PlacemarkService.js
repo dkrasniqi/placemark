@@ -210,18 +210,13 @@ export class PlacemarkService {
       console.log(image);
       let formdata = new FormData();
       formdata.append("imagefile", image);
-
-      console.log(formdata);
-      const data = {
-        imagefile: formdata,
-      };
       const response = await axios({
         method: "post",
         url: `${this.baseUrl}/api/placemark/${id}/uploadimage`,
         data: formdata,
         headers: { "Content-Type": "multipart/form-data" },
-      })
-      
+      });
+
       return response;
     } catch (err) {
       console.log(err);

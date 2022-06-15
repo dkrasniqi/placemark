@@ -1,24 +1,24 @@
 import { db } from "../models/db.js";
 import { imageStore } from "../models/image-store.js";
 
-export const placemarkController= {
+export const placemarkController = {
   index: {
-    handler: async function(request, h){
+    handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
       const placemarkId = request.params.id;
       const placemark = await db.placemarkStore.getPlacemarkById(placemarkId);
-      
+
       const data = {
         user: loggedInUser,
         placemark: placemark,
         title: placemark.name,
-      }
-      return  h.view("placemark", data )
-    }
+      };
+      return h.view("placemark", data);
+    },
   },
 
   uploadImage: {
-    handler: async function(request, h) {
+    handler: async function (request, h) {
       try {
         const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
         const file = request.payload.imagefile;
@@ -39,10 +39,7 @@ export const placemarkController= {
       multipart: true,
       output: "data",
       maxBytes: 209715200,
-      parse: true
-    }
-  }
-
-  
-
-}
+      parse: true,
+    },
+  },
+};

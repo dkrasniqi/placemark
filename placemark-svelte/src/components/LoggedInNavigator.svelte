@@ -7,7 +7,7 @@
   <div class="navbar-brand">
     <div class="column">
       <a href="/#/dashboard">
-        <img src={logo} alt="logo" >
+        <img src={logo} alt="logo" />
       </a>
     </div>
   </div>
@@ -16,7 +16,9 @@
       <div class="navbar-item">
         <div class="buttons">
           {#if user.role === "admin"}
-          <a id="admin-dashboard" class="button" href="/#/admin/dashboard">Admin Dashbooard</a>
+            <a id="admin-dashboard" class="button" href="/#/admin/dashboard"
+              >Admin Dashbooard</a
+            >
           {/if}
           <a id="dashboard" class="button" href="/#/dashboard">Dashboard</a>
           <a id="map" class="button" href="/#/map">Map</a>

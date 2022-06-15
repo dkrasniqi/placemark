@@ -5,7 +5,6 @@ import { donald, testUsers } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
 
 suite("User Model tests", () => {
-
   setup(async () => {
     db.init();
     await db.userStore.deleteAll();
@@ -56,17 +55,17 @@ suite("User Model tests", () => {
     assert.equal(testUsers.length, allUsers.length);
   });
 
-  test("change Name User", async () =>{
+  test("change Name User", async () => {
     const user = await db.userStore.addUser(donald);
     const newFirstName = "Joe";
-    const newLastName = "Biden"
+    const newLastName = "Biden";
     await db.userStore.changeUserName(user._id, newFirstName, newLastName);
     const updatedUser = await db.userStore.getUserById(user._id);
     assert.equal(updatedUser.firstName, newFirstName);
     assert.equal(updatedUser.lastName, newLastName);
   });
 
-  test("change Name Mail", async () =>{
+  test("change Name Mail", async () => {
     const user = await db.userStore.addUser(donald);
     const newMail = "newdonald@trump.com";
     await db.userStore.changeUserMail(user._id, newMail);
@@ -74,13 +73,11 @@ suite("User Model tests", () => {
     assert.equal(updatedUser.email, newMail);
   });
 
-  test("change Password User", async () =>{
+  test("change Password User", async () => {
     const user = await db.userStore.addUser(donald);
     const newPass = "newsecretpass";
-    await db.userStore.changeUserPass(user._id, newPass)
+    await db.userStore.changeUserPass(user._id, newPass);
     const updatedUser = await db.userStore.getUserById(user._id);
     assert.equal(updatedUser.password, newPass);
-  })
-
-
+  });
 });

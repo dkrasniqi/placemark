@@ -13,7 +13,7 @@ async function seed() {
 export function connectMongo() {
   const result = dotenv.config();
 
-  if(result.error){
+  if (result.error) {
     console.log(result.error.message);
   }
 
@@ -32,6 +32,4 @@ export function connectMongo() {
     console.log(`database connected to ${this.name} on ${this.host}`);
     seed();
   });
-
-  
 }

@@ -15,23 +15,20 @@ import { userController } from "./controllers/userController.js";
 import { apiRoutes } from "./api-routes.js";
 import { validate } from "./api/jwt-utils.js";
 
-
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const result = dotenv.config();
 
-  if(result.error){
-    console.log(result.error.message);
-  }
+if (result.error) {
+  console.log(result.error.message);
+}
 
 async function init() {
   const server = Hapi.server({
     port: process.env.PORT || 3000,
     routes: {
       cors: true,
-    }
-    
+    },
   });
   const swaggerOptions = {
     info: {
@@ -42,10 +39,10 @@ async function init() {
       jwt: {
         type: "apiKey",
         name: "Authorization",
-        in: "header"
-      }
+        in: "header",
+      },
     },
-    security: [{ jwt: [] }]
+    security: [{ jwt: [] }],
   };
 
   await server.register(Vision);
@@ -54,11 +51,9 @@ async function init() {
   await server.register({
     plugin: HapiSwagger,
     options: swaggerOptions,
-  },)
+  });
   await server.register(jwt);
   server.validator(Joi);
-
-  
 
   server.views({
     engines: {
@@ -72,8 +67,8 @@ async function init() {
     isCached: false,
   });
 
-  Handlebars.registerHelper("ifEquals", function(string1, string2, options) {
-    return (string1 === string2) ? options.fn(this) : options.inverse(this);
+  Handlebars.registerHelper("ifEquals", function (string1, string2, options) {
+    return string1 === string2 ? options.fn(this) : options.inverse(this);
   });
 
   server.auth.strategy("session", "cookie", {
@@ -89,10 +84,9 @@ async function init() {
   server.auth.strategy("jwt", "jwt", {
     key: process.env.COOKIE_PASS,
     validate: validate,
-    verifyOptions: { algorithms: ["HS256"] }
+    verifyOptions: { algorithms: ["HS256"] },
   });
 
-  
   server.auth.default("session");
 
   db.init();
@@ -106,7 +100,7 @@ async function init() {
 
 process.on("unhandledRejection", (err) => {
   console.log(err);
-  
+
   process.exit(1);
 });
 

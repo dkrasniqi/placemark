@@ -1,39 +1,39 @@
 <form action="/dashboard/addplacemark" method="POST" class="box">
-    <div class="field">
-      <label class="label">Placemark Name</label>
-      <input class="input" type="text" placeholder="Enter placemark name" name="name">
+  <div class="field">
+    <label class="label">Placemark Name</label>
+    <input class="input" type="text" placeholder="Enter placemark name" name="name" />
+  </div>
+  <div class="field">
+    <label class="label">Placemark Description</label>
+    <input class="input" type="text" placeholder="Enter placemark name" name="description" />
+  </div>
+  <div class="field">
+    <label class="label">Placemark Lat</label>
+    <input class="input" type="text" placeholder="Enter Latitude" name="lat" />
+  </div>
+  <div class="field">
+    <label class="label">Placemark Long</label>
+    <input class="input" type="text" placeholder="Enter Longitude" name="long" />
+  </div>
+  <div class="field">
+    <label class="label">Placemark Categorie</label>
+    <div class="select">
+      <select name="categorie">
+        <option>Landscape feature</option>
+        <option>National monumentum</option>
+        <option>Walking Trail</option>
+        <option>Bridge</option>
+        <option>Tree</option>
+        <option>Venue</option>
+        <option>Ringfort</option>
+        <option>Dolmen</option>
+        <option>River</option>
+        <option>Bog</option>
+        <option>Island</option>
+        <option>Forest</option>
+      </select>
     </div>
-    <div class="field">
-      <label class="label">Placemark Description</label>
-      <input class="input" type="text" placeholder="Enter placemark name" name="description">
-    </div>
-    <div class="field">
-      <label class="label">Placemark Lat</label>
-      <input class="input" type="text" placeholder="Enter Latitude" name="lat">
-    </div>
-    <div class="field">
-      <label class="label">Placemark Long</label>
-      <input class="input" type="text" placeholder="Enter Longitude" name="long">
-    </div>
-    <div class="field">
-      <label class="label">Placemark Categorie</label>
-      <div class="select">
-        <select  name="categorie">
-          <option>Landscape feature</option>
-          <option>National monumentum</option>
-          <option>Walking Trail</option>
-          <option>Bridge</option>
-          <option>Tree</option>
-          <option>Venue</option>
-          <option>Ringfort</option>
-          <option>Dolmen</option>
-          <option>River</option>
-          <option>Bog</option>
-          <option>Island</option>
-          <option>Forest</option>
-        </select>
-      </div>
-    </div>
+  </div>
 
-    <button class="button is-link">Add Placemark</button>
-  </form>
+  <button class="button is-link">Add Placemark</button>
+</form>

@@ -9,7 +9,7 @@ export const placemarkMongoStore = {
   async getPlacemarkById(id) {
     if (id) {
       const placemark = await Placemark.findOne({ _id: id }).lean();
-      if(placemark){
+      if (placemark) {
         return placemark;
       }
     }

@@ -1,24 +1,22 @@
 <script>
   import Navigator from "../components/Navigator.svelte";
-  import {getContext} from "svelte";
-  
+  import { getContext } from "svelte";
+
   const placemarkService = getContext("PlacemarkService");
   placemarkService.logout();
 </script>
-<Navigator/>
+
+<Navigator />
 <section class="section columns is-vcentered">
-  
   <div class="hero-body">
     <div class="columns is-vcentered">
       <div class="column is-6 is-offset-1">
-        <br><br><br><br>
-        <h1 class="title is-2">
-            Placemark by Dionis Krasniqi
-        </h1>
+        <br /><br /><br /><br />
+        <h1 class="title is-2">Placemark by Dionis Krasniqi</h1>
         <h2 class="subtitle is-5">
-            The best placemark app you will come across
+          The best placemark app you will come across
         </h2>
       </div>
     </div>
-</div>
+  </div>
 </section>

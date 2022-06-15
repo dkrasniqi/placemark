@@ -154,7 +154,7 @@ export const placemarkApi = {
           placemark.img = url;
           db.placemarkStore.updatePlacemark(placemark);
         }
-        return h.response().code(204);
+        return url;
       } catch (err) {
         console.log(err);
         return Boom.serverUnavailable("Error while uploading picture");

@@ -10,8 +10,8 @@
       <th>Latitude</th>
       <th>Longitude</th>
       <th>Categorie</th>
-      <th></th>
-      <th></th>
+      <th />
+      <th />
     </tr>
   </thead>
   <tbody>
@@ -30,17 +30,20 @@
         <td>
           {placemark.long}
         </td>
-         <td>
+        <td>
           {placemark.categorie}
         </td>
         <td>
           <a href="/#/placemark/{placemark._id}" class="ui icon button">
-            <i class="fas fa-info"></i>
+            <i class="fas fa-info" />
           </a>
         </td>
         <td>
-          <a href="/#/admin/dashboard/deleteplacemark/{placemark._id}" class="ui icon button">
-            <i class="fas fa-trash"></i>
+          <a
+            href="/#/admin/dashboard/deleteplacemark/{placemark._id}"
+            class="ui icon button"
+          >
+            <i class="fas fa-trash" />
           </a>
         </td>
       </tr>
