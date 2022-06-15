@@ -147,14 +147,14 @@ export const placemarkApi = {
       try {
         const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
         const file = request.payload.imagefile;
-        console.log(file);
-        console.log(typeof file);
+        let link
         if (Object.keys(file).length > 0) {
           const url = await imageStore.uploadImage(request.payload.imagefile);
           placemark.img = url;
+          link = url;
           db.placemarkStore.updatePlacemark(placemark);
         }
-        return url;
+        return link;
       } catch (err) {
         console.log(err);
         return Boom.serverUnavailable("Error while uploading picture");
