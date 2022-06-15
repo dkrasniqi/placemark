@@ -27,8 +27,6 @@
     ]
   };
 
-$: selected, console.log(selected);
-
 </script>
 
 <LoggedInNavigator/>

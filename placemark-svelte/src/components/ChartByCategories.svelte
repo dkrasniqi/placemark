@@ -20,7 +20,6 @@
 
   onMount(async () => {
     let placemarks = await placemarkService.getUserPlacemarks(user.id);
-    console.log(placemarks)
     placemarks.forEach(placemark => {
       if (placemark.categorie == "Landscape feature") {
         data.datasets[0].values[0] += 1;
@@ -59,8 +58,6 @@
       }
     })
   });
-
-  $: value, console.log(value)
 
 </script>
 <h1 class="title is-4">Your Placemarks by Categories</h1>

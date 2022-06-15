@@ -48,7 +48,7 @@ suite("User API tests", () => {
       const returnedUser = await placemarkService.getUser("1234");
       assert.fail("Should not return a response");
     } catch (error) {
-      console.log(error.response.data.message);
+    
       assert(error.response.data.message === "No existing user with this id");
       assert.equal(error.response.data.statusCode, 503);
     }

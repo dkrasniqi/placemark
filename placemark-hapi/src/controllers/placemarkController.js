@@ -22,6 +22,8 @@ export const placemarkController= {
       try {
         const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
         const file = request.payload.imagefile;
+        console.log(file);
+        console.log(typeof file);
         if (Object.keys(file).length > 0) {
           const url = await imageStore.uploadImage(request.payload.imagefile);
           placemark.img = url;

@@ -10,7 +10,6 @@ export const adminController  =  {
       }
       const users = await db.userStore.getAllUsers();
       const placemarks = await db.placemarkStore.getAllPlacemarks();
-      console.log(placemarks);
       const data = {
         title: "Users",
         user: loggedInUser,

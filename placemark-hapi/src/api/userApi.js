@@ -14,7 +14,6 @@ export const userApi = {
     handler: async function(request, h){
       try{
         const users = await db.userStore.getAllUsers();
-        console.log("users")
         return users;
       }catch(err){
         return Boom.serverUnavailable("Database Error");
@@ -120,7 +119,7 @@ export const userApi = {
         const newFirst = request.payload.newFirstName;
         const newLast = request.payload.newLastName;
         const userId = request.payload.id;
-        console.log(request.payload);
+      
         const newName = await db.userStore.changeUserName(userId, newFirst, newLast);  
         return h.response(newName).code(201);
       }catch{

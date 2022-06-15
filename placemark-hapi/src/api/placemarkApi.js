@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable prefer-destructuring */
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
@@ -7,6 +8,7 @@ import { decodeToken } from "./jwt-utils.js";
 import { imageStore } from "../models/image-store.js";
 
 export const placemarkApi = {
+  
   find: {
     auth: {
       strategy: "jwt",
@@ -14,7 +16,6 @@ export const placemarkApi = {
     handler: async function(request, h){
       try{
         const placemarks = await db.placemarkStore.getAllPlacemarks();
-        console.log(placemarks)
         return placemarks;
 
       }catch(err){
@@ -57,7 +58,6 @@ export const placemarkApi = {
     handler: async function(request, h){
       try{
         const placemarks = await db.placemarkStore.getUserPlacemarks(request.params.id);
-        console.log(placemarks);
         if(!placemarks){
           return Boom.notFound("No existing placemark with this userid");
         }
@@ -82,14 +82,12 @@ export const placemarkApi = {
     },
     handler: async function(request, h){
       try{
-        console.log(request.payload)
         const placemarkObj = await db.placemarkStore.addPlacemark(request.payload);
         if(!placemarkObj){
           return Boom.badImplementation("Error while creating placemark");
         }
         return h.response(placemarkObj).code(201);
       }catch(err){
-        console.log(err);
         return Boom.serverUnavailable("Database error");
       }
     },
@@ -148,23 +146,19 @@ export const placemarkApi = {
     handler: async function(request, h) {
       try {
         const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
-        let formdata = new FormData();
-        formdata = request.payload.formdata;
-        const imagefile = formdata.get("image")
-        console.log(placemark);
-        console.log(request.params.id);
-        console.log(imagefile);
-          const url = await imageStore.uploadImage(imagefile);
+        const file = request.payload.imagefile;
+        console.log(file);
+        console.log(typeof file);
+        if (Object.keys(file).length > 0) {
+          const url = await imageStore.uploadImage(request.payload.imagefile);
           placemark.img = url;
           db.placemarkStore.updatePlacemark(placemark);
-          return url;
         }
-        
-       catch (err) {
+        return h.response().code(204);
+      } catch (err) {
         console.log(err);
         return Boom.serverUnavailable("Error while uploading picture");
       }
-    
     },
     payload: {
       multipart: true,
