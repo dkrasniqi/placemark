@@ -72,7 +72,6 @@ export const placemarkApi = {
     notes: "Returns placemarks",
     validate: { params: { id: IdSpec }, failAction: validationError },
     response: { schema: PlacemarkArray, failAction: validationError },
-
   },
 
 

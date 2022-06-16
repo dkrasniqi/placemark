@@ -31,7 +31,7 @@
 
   setContext(
     "PlacemarkService",
-    new PlacemarkService("http://localhost:4000")
+    new PlacemarkService("https://calm-sierra-28993.herokuapp.com")
   );
 </script>
 
