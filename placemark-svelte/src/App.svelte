@@ -5,12 +5,10 @@
   import Dashboard from "./pages/Dashboard.svelte";
   import Settings from "./pages/Settings.svelte";
   import Placemark from "./pages/Placemark.svelte";
-  import DeletePlacemark from "./pages/DeletePlacemark.svelte";
-  import DeletePlacemarkAdmin from "./pages/DeletePlacemarkAdmin.svelte";
   import Admin from "./pages/Admin.svelte";
-  import DeleteUser from "./pages/DeleteUser.svelte";
   import Map from "./pages/Map.svelte";
   import Charts from "./pages/Charts.svelte";
+  import Gallery from "./pages/Gallery.svelte";
 
   import Router from "svelte-spa-router";
   import { PlacemarkService } from "./services/PlacemarkService.js";
@@ -25,17 +23,15 @@
     "/dashboard": Dashboard,
     "/settings": Settings,
     "/placemark/:id": Placemark,
-    "/dashboard/deleteplacemark/:id": DeletePlacemark,
-    "/admin/dashboard/deleteplacemark/:id": DeletePlacemarkAdmin,
-    "/admin/dashboard/deleteuser/:id": DeleteUser,
     "/admin/dashboard": Admin,
     "/map": Map,
     "/charts": Charts,
+    "/gallery": Gallery,
   };
 
   setContext(
     "PlacemarkService",
-    new PlacemarkService("https://calm-sierra-28993.herokuapp.com")
+    new PlacemarkService("http://localhost:4000")
   );
 </script>
 

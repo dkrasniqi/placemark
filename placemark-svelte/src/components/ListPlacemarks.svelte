@@ -1,6 +1,7 @@
 <script>
   import { push } from "svelte-spa-router";
   import { getContext } from "svelte";
+  import DeletePlacemarkButton from "./DeletePlacemarkButton.svelte";
   const placemarkService = getContext("PlacemarkService");
   const user = JSON.parse(localStorage.placemark);
 
@@ -51,12 +52,7 @@
           </a>
         </td>
         <td>
-          <a
-            href="#/dashboard/deleteplacemark/{placemark._id}"
-            class="ui icon button"
-          >
-            <i class="fas fa-trash" />
-          </a>
+          <DeletePlacemarkButton on:message={getPlacemarks} placemarkId={placemark._id} />
         </td>
       </tr>
     {/each}

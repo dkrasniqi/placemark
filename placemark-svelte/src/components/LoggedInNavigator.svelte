@@ -22,6 +22,7 @@
           {/if}
           <a id="dashboard" class="button" href="/#/dashboard">Dashboard</a>
           <a id="map" class="button" href="/#/map">Map</a>
+          <a id ="gallery" class="button" href="/#/gallery">Gallery</a>
           <a id="charts" class="button" href="/#/charts">Charts</a>
           <a id="settings" class="button" href="/#/settings">Settings</a>
           <a id="logout" class="button" href="/#/logout"> Logout </a>

@@ -1,5 +1,17 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
+
+  import DeletePlacemarkButton from "./DeletePlacemarkButton.svelte";
   export let placemarks = [];
+
+  async function update(){
+    dispatch("message", {
+        success: true,
+      });
+  }
+
+
 </script>
 
 <table class="table is-fullwidth">
@@ -39,12 +51,7 @@
           </a>
         </td>
         <td>
-          <a
-            href="/#/admin/dashboard/deleteplacemark/{placemark._id}"
-            class="ui icon button"
-          >
-            <i class="fas fa-trash" />
-          </a>
+         <DeletePlacemarkButton on:message={update} placemarkId={placemark._id}/>
         </td>
       </tr>
     {/each}

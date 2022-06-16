@@ -83,6 +83,29 @@ export const userApi = {
     notes: "Deletes all users from database",
   },
 
+  deleteOne:{
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function(request, h){
+      try{
+        const user = await db.userStore.getUserById(request.params.id);
+        if(!user){
+          return Boom.notFound("No existing user with this id");
+        }
+        await db.userStore.deleteUserById(user._id);
+        return h.response().code(204);
+
+      }catch(err){
+        return Boom.serverUnavailable("No existing user with this id");
+      }
+    },
+    tags: ["api"],
+    description: "Deletes a specific user",
+    notes: "Deletes a user by id",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+  },
+
   authenticate: {
     auth: false,
     handler: async function (request, h) {

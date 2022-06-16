@@ -223,4 +223,8 @@ export class PlacemarkService {
       return false;
     }
   }
+  async getPlacemarkImages(id) {
+    const response = await axios.get(`${this.baseUrl}/api/placemarks/${id}`);
+    return response.data.img;
+  }
 }

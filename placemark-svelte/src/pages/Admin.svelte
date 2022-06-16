@@ -51,10 +51,10 @@
 
 <div class="columns">
   <div class="column">
-    <ListUsers {users} />
+    <ListUsers on:message={getUsers} {users} />
   </div>
 
   <div class="column">
-    <ListPlacemarksAdmin {placemarks} />
+    <ListPlacemarksAdmin on:message={getPlacemarks} {placemarks} />
   </div>
 </div>

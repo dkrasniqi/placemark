@@ -1,26 +1,40 @@
 <script>
-  import { getContext } from "svelte";
+  import { getContext, onMount } from "svelte";
   const placemarkService = getContext("PlacemarkService");
   const user = JSON.parse(localStorage.placemark);
 
   let files;
   export let placemarkid;
-  let url = null;
+  let images;
+
+  onMount(async () => {
+    updateImages();
+  });
+
+  async function updateImages(){
+    console.log("inside of update")
+    images = await placemarkService.getPlacemarkImages(placemarkid);
+  }
+
 
   async function upload() {
     const response = await placemarkService.uploadPicture(
       placemarkid,
       files[0]
     );
-    url = response;
+    updateImages();
   }
+
+  
 </script>
 
 <div class="card">
   <div class="card-image">
     <figure class="image is-256x256">
-      {#if url}
-        <img src={url} alt="your uplaod" />
+      {#if images}
+        {#each images as image, i}
+          <img src={image} alt="your upload"/>
+        {/each}
       {/if}
     </figure>
   </div>

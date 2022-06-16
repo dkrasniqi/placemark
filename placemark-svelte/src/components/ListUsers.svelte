@@ -1,5 +1,14 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+  import DeleteUserButton from "./DeleteUserButton.svelte";
+  const dispatch = createEventDispatcher(); 
   export let users = [];
+
+  async function update(){
+    dispatch("message", {
+        success: true,
+      });
+  }
 </script>
 
 <table class="table is-fullwidth is-striped">
@@ -29,12 +38,7 @@
           {user.role}
         </td>
         <td>
-          <a
-            href="#/admin/dashboard/deleteuser/{user._id}"
-            class="ui icon button"
-          >
-            <i class="fas fa-trash" />
-          </a>
+         <DeleteUserButton on:message={update} userId={user._id}/>
         </td>
       </tr>
     {/each}

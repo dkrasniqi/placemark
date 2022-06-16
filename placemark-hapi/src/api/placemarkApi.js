@@ -150,7 +150,7 @@ export const placemarkApi = {
         let link
         if (Object.keys(file).length > 0) {
           const url = await imageStore.uploadImage(request.payload.imagefile);
-          placemark.img = url;
+          placemark.img.push(url);
           link = url;
           db.placemarkStore.updatePlacemark(placemark);
         }
