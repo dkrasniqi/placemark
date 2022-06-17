@@ -67,6 +67,7 @@ async function init() {
     isCached: false,
   });
 
+  // The follwing code fragment was taken from stackoverflow: https://stackoverflow.com/questions/34252817/handlebarsjs-check-if-a-string-is-equal-to-a-value
   Handlebars.registerHelper("ifEquals", function (string1, string2, options) {
     return string1 === string2 ? options.fn(this) : options.inverse(this);
   });

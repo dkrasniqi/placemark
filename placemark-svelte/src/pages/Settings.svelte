@@ -5,11 +5,12 @@
   const placemarkService = getContext("PlacemarkService");
 
   const loggedInUser = localStorage.getItem("placemark");
-  const user = JSON.parse(localStorage.placemark);
-
+  
+  console.log(loggedInUser);
   if (!loggedInUser) {
     push("/login");
   }
+  const user = JSON.parse(localStorage.placemark);
 
   let newFirstName, newLastName;
   let oldPass,

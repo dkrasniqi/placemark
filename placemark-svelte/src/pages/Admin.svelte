@@ -5,6 +5,12 @@
   import { getContext } from "svelte";
   import { push } from "svelte-spa-router";
 
+  const loggedInUser = localStorage.getItem("placemark");
+
+  if (!loggedInUser) {
+    push("/login");
+  }
+
   const user = JSON.parse(localStorage.placemark);
   let users = [];
   let placemarks = [];

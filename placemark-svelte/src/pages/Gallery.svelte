@@ -6,10 +6,12 @@
   const placemarkService = getContext("PlacemarkService");
   const user = JSON.parse(localStorage.placemark);
   let placemarks = null;
+  const loggedInUser = localStorage.getItem("placemark");
 
-  if (!user) {
-  push("/login");
-  };
+  if (!loggedInUser) {
+    push("/login");
+  }
+ 
 
   onMount(async () => {
     placemarks = await placemarkService.getUserPlacemarks(user.id);

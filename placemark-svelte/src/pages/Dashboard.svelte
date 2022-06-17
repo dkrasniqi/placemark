@@ -7,13 +7,14 @@
   import { push } from "svelte-spa-router";
 
   const loggedInUser = localStorage.getItem("placemark");
-  const placemarkService = getContext("PlacemarkService");
-  let placemarkMap = null;
-  let listPlacemarks = null;
 
   if (!loggedInUser) {
     push("/login");
   }
+  
+  const placemarkService = getContext("PlacemarkService");
+  let placemarkMap = null;
+  let listPlacemarks = null;
 
   function addedPlacemark(event) {
     placemarkMap.addPlacemarkMarker(event.detail.placemark);

@@ -1,6 +1,7 @@
 <script>
   import logo from "../assets/logo.png";
   const user = JSON.parse(localStorage.placemark);
+  
 </script>
 
 <nav class="navbar">
