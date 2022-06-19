@@ -6,8 +6,8 @@ Placemark is a web-application which helps you to save a POI (Point-of-Interest)
 
 ### Access
 
- [Hapijs Server-Side] (https://calm-sierra-28993.herokuapp.com)
- [Svelte - Frontend] (https://placemarkbydionis.netlify.app/)
+ * [Hapijs Server-Side] (https://calm-sierra-28993.herokuapp.com)
+ * [Svelte - Frontend] (https://placemarkbydionis.netlify.app/)
 
 **NOTE: The Server-Side of this project has limited features. To access all features please use the Svelte-Frontend**
 
